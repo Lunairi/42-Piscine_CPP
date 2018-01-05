@@ -27,10 +27,10 @@ Human::~Human(void)
 
 std::string Human::identify()
 {
-	return (refbrain.identify());
+	return (this->refbrain.identify());
 }
 
 Brain &Human::getBrain(void)
 {
-	return (refbrain);
+	return (this->refbrain);
 }
