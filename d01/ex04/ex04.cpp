@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Zombie.hpp             _             _              :::      ::::::::   */
+/*    ex04.cpp               _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,23 +10,18 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_H
-# define ZOMBIE_H
-
 #include <iostream>
 #include <string>
 
-class	Zombie {
+int	main() 
+{
+	std::string		hi = "HI THIS IS BRAIN";
+	std::string 	*ptr = &hi;
+	std::string		&ref = hi;
 
-	public: 
+	std::cout << "This is display with pointer:" << std::endl << *ptr << std::endl;
 
-		Zombie(std::string nick, std::string desc); 
-		~Zombie(void);
+	std::cout << std::endl << "This is display with reference:" << std::endl << ref << std::endl;
 
-		std::string 	name;
-		std::string		typez;
-
-		void announce();
-};
-
-#endif
+	return (0);
+}

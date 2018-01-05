@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Zombie.hpp             _             _              :::      ::::::::   */
+/*    Zombie.cpp             _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,23 +10,23 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_H
-# define ZOMBIE_H
-
 #include <iostream>
 #include <string>
+#include "Zombie.hpp"
 
-class	Zombie {
+Zombie::Zombie()
+{
+	return;
+}
 
-	public: 
+Zombie::~Zombie(void) 
+{
+	std::cout << this->name << " has returned back to the underworld and disappeared." << std::endl;
+	return;
+}
 
-		Zombie(std::string nick, std::string desc); 
-		~Zombie(void);
-
-		std::string 	name;
-		std::string		typez;
-
-		void announce();
-};
-
-#endif
+void	Zombie::announce()
+{
+	std::cout << "<" << this->name << " (" << this->typez << ")>  Braiiiiiiinnnssss.." << std::endl;
+	return;
+}

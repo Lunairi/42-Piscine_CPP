@@ -16,7 +16,7 @@
 
 Zombie::Zombie(std::string nick, std::string desc) : name(nick), typez(desc)
 {
-	announce(this->name, this->typez);
+	announce();
 	return;
 }
 
@@ -26,13 +26,8 @@ Zombie::~Zombie(void)
 	return;
 }
 
-void	Zombie::announce(std::string name, std::string type)
+void	Zombie::announce()
 {
-	std::cout << "<" << name << " (" << type << ")>  Braiiiiiiinnnssss.." << std::endl;
+	std::cout << "<" << this->name << " (" << this->typez << ")>  Braiiiiiiinnnssss.." << std::endl;
 	return;
-}
-
-void	Zombie::death()
-{
-	std::cout << this->name << " has returned back to the underworld and disappeared." << std::endl;
 }

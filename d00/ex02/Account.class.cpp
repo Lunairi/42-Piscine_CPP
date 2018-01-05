@@ -12,9 +12,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <algorithm>
-#include <functional>
 #include <iomanip>
 #include <ctime>
 #include "Account.class.hpp"

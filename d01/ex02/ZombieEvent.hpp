@@ -27,7 +27,6 @@ class	ZombieEvent {
 		std::string		typez;
 
 		void	setZombieType(std::string desc);
-		Zombie	death();
 		Zombie	*newZombie(std::string name);
 		Zombie	*randomChump();
 

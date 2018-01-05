@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Zombie.hpp             _             _              :::      ::::::::   */
+/*    ZombieHorde.hpp        _                            :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,23 +10,26 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_H
-# define ZOMBIE_H
+#ifndef ZOMBIEHORDE_H
+# define ZOMBIEHORDE_H
 
 #include <iostream>
 #include <string>
+#include "Zombie.hpp"
 
-class	Zombie {
+class	ZombieHorde {
 
 	public: 
 
-		Zombie(std::string nick, std::string desc); 
-		~Zombie(void);
+		ZombieHorde(int n); 
+		~ZombieHorde(void);
 
-		std::string 	name;
-		std::string		typez;
+		int		amount;
+		Zombie	*horde;
 
-		void announce();
+		void 			announce();
+		std::string		randomname(int x);
+
 };
 
 #endif
