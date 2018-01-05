@@ -1,0 +1,912 @@
+Notes for CPP Piscine Day 00 (We use C++ 98)
+
+Namespace: A way to put together symbols and syntax
+Stdio Stream: How to handle stdout, stdin and stderr
+Class & Instance: Object oriented program
+Member Attribute & Member Functions: This is the term method, a function belonging to a class (member function)
+This: Instance pointer, or self (in other languages)
+Init List: List initialization, create instances with diff syntax, initialize const in classes
+Const: Learn syntax associated with const in class
+Encapsulation: Private/public class 
+Class VS Struct: Structures that are similar to Class
+Accessors: Access private attribute and give/update values in safe way
+Comparisons: Compare instances in boolean way, or other comparisons
+Non Member Attribtues & Non Member Functions: Static attributes and functions, has new syntax
+Points To Members: Pointers to functions, but impossible to do pointer to member attribute or member functions
+
+/******************************************************************************************************************/
+NAMESPACE:
+- A new notion to group together symbols and functions
+- No compilation error eventhough we call same variables in multiple areas
+
+#include <stdio.h>
+
+int		gl_var = 1;
+int		f(void)
+{
+	return (2);
+}
+
+namespace Foo
+{
+	int		gl_var = 3;
+	int		f(void)
+	{
+		return (4);
+	}
+}
+
+namepsace Bar
+{
+	int		gl_var = 5;
+	int		f(void)
+	{
+		return (6);
+	}
+}
+
+:: <-- scope resolution operator
+
+namespace Muf = Bar; <-- namespace aliasing
+
+int		main(void) {
+	printf( "gl_var:		[d]\n", gl_var);
+	printf( "f():			[d]\n\n", f());
+
+	printf( "Foo::gl_var:	[d]\n", Foo::gl_var);
+	printf( "Foo::f():		[d]\n\n", Foo::f());
+
+	printf( "Boo::gl_var:	[d]\n", Boo::gl_var);
+	printf( "Boo::f():		[d]\n\n", Boo::f());
+
+	printf( "Muf::gl_var:	[d]\n", Muf::gl_var);
+	printf( "Muf::f():		[d]\n\n", Muf::f());
+
+	printf( "::gl_var:		[d]\n", ::gl_var); <-- same as gl_var
+	printf( "::f():			[d]\n\n", ::f()); <-- same as f()
+}
+
+g++ -Wall -Wextra -Wno-used -Werror main.cpp <-- compilation
+
+/******************************************************************************************************************/
+STDIO STREAMS:
+- In c, you use write() to do io manipulation
+- In c++ there is cin and cout, you can write/fetch data on standard input/output
+- Two new operator, << and >>
+
+#include <iostream>
+
+int	main(void)
+{
+	char buff[512];
+
+	std::cout << "Hello world !" << std::endl;
+
+	std::cout << "Input a word: ";
+	std:cinn >> buff;
+	std::cout << "You entered: [" << buff << "]" << std::endl;
+}
+
+std namespace <--- has cout and cin and endl (which is end line)
+>> & << - Points which direction the text/input goes
+
+www.cplusplus.com/reference/iostream <-- has all info for iostream there
+
+/******************************************************************************************************************/
+CLASS & INSTANCE:
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# define SAMPLE_CLASS_H
+
+class	Sample {
+
+	public: 
+
+		Sample(void); <-- constructor
+		~Sample(void); <-- destructor
+}; <-- DONT FORGET THIS MOTHER FUCKING SEMI COLON
+
+#endif
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void){
+	std::cout << "Constructor called" << std::endl;
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+
+int	main()
+{
+	Sample instance; <-- is destroyed when function is done, it will called constructor when start, than destructor when end
+	return (0);
+}
+
+/******************************************************************************************************************/
+MEMBER ATTRIBUTES & MEMBER FUNCTIONS:
+- Put things inside class to make them more useful
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# define SAMPLE_CLASS_H
+
+class	Sample {
+
+	public: 
+
+		int foo;
+
+		Sample(void); 
+		~Sample(void);
+
+		void	bar(void); <-- instance inside my class that I can use inside my class
+}; 
+
+#endif
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void){
+	std::cout << "Constructor called" << std::endl;
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+void	Sample::bar(void){ <-- even though it says void you can still pass variables
+	std::cout << "Member function bar called" << std:endl;
+	return;
+}
+
+
+int	main()
+{
+	Sample instance;
+
+	instance.foo = 42;
+	std::cout << "instance.foo: " << instance.foo << std::endl;
+
+	instance.bar();
+
+	return (0);
+}
+
+/******************************************************************************************************************/
+THIS:
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# define SAMPLE_CLASS_H
+
+class	Sample {
+
+	public: 
+
+		int foo;
+
+		Sample(void); <-- constructor (code that is executed when class is instanciated)
+		~Sample(void); <-- destructor
+
+		void	bar(void); <-- this is usable when class is instanciated
+}; 
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void){
+	std::cout << "Constructor called" << std::endl;
+
+	this->foo = 42; <--- this syntax is a pointer on the current instance
+	std::cout << "this->foo: " << this->foo << std:endl;
+
+	this->bar();
+
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+void	Sample::bar(void){
+	std::cout << "Member function bar called" << std:endl;
+	return;
+}
+
+
+int	main()
+{
+	Sample instance;
+
+	return (0);
+}
+
+/******************************************************************************************************************/
+INITIALIZATION LIST:
+
+FILE: SAMPLE1_CLASS_H
+
+#ifndef SAMPLE1_CLASS_H
+# define SAMPLE1_CLASS_H
+
+class	Sample1{
+	
+	public:
+
+		char	a1;
+		int		a2;
+		float	a3;
+
+		Sample1(char p1, int p2, float p3); <-- now accepts 3 parameters, match parameter of contructor with class
+		~Sample1(void);
+};
+
+FILE: SAMPLE2_CLASS_H
+
+#ifndef SAMPLE2_CLASS_H
+# define SAMPLE2_CLASS_H
+
+class	Sample2{
+	
+	public:
+
+		char	a1;
+		int		a2;
+		float	a3;
+
+		Sample2(char p1, int p2, float p3); <-- now accepts 3 parameters, match parameter of contructor with class
+		~Sample2(void);
+};
+
+
+FILE: SAMPLE1.CLASS.CPP <--- one way to set values inside class (should not be done)
+
+#include <iostream>
+#include "Sample1.class.hpp"
+
+Sample1::Sample1(char p1, int p2, float p3) {
+	
+	std::cout << "Constructor called" << std::endl;
+
+	this->a1 = p1;
+	std::cout << "this->a1 = " << this->a1 << std::endl;
+
+	this->a2 = p2;
+	std::cout << "this->a2 = " << this->a2 << std::endl;
+
+	this->a3 = p3;
+	std::cout << "this->a3 = " << this->a3 << std::endl;
+
+	return;
+}
+
+
+Sample1::~Sample1(void) {
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+
+
+FILE: SAMPLE2.CLASS.CPP <-- another way to set values (should be done)
+
+#include <iostream>
+#include "Sample2.class.hpp"
+
+Sample2::Sample2(char p1, int p2, float p3) : a1(p1), a2(p2), a3(p3) {
+	
+	std::cout << "Constructor called" << std::endl;
+	std::cout << "this->a1 = " << this->a1 << std::endl;
+	std::cout << "this->a2 = " << this->a2 << std::endl;
+	std::cout << "this->a3 = " << this->a3 << std::endl;
+
+	return;
+}
+
+
+Sample2::~Sample2(void) {
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+
+
+int	main(){
+	Sample1 instance1('a', 42, 4.2f);
+	Sample2 instance2('z', 13, 3.14f);
+
+	return (0);
+}
+
+/******************************************************************************************************************/
+CONST:
+- Make a variable constant to have a constant
+- Const is a diff between program that blows up and doesn't
+- Make code as const as possible
+- Cannot make assignment to constant
+- Only way to assign to constant is to initialize the variable and set it
+- Ex. int const a = 42 would work
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# define SAMPLE_CLASS_H
+
+class	Sample {
+
+	public: 
+
+		float const pi; <-- want this to be assigned through my constructor f
+		int			qd;
+
+		int foo;
+
+		Sample(float const f);
+		~Sample(void);
+
+		void	bar(void) const;
+}; 
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP <-- another way to set values (should be done)
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(float const f) : pi(f), qd(42) { <--- can intialize constant variables this way
+	
+	std::cout << "Constructor called" << std::endl;
+
+	return;
+}
+
+Sample2::~Sample(void) {
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+void	Sample::bar(void) const {
+	std::cout << "this->pi = " << this->pi << std::endl;
+	std::cout << "this->qd = " << this->qd << std::endl;
+
+	this->qd = 0; <--This will not be able to happen due to the function is const,
+						this function is read only, not write only
+
+	return;
+}
+
+
+int	main() {
+	Sample instance(3.14f);
+	instance.bar();
+	return (0);
+}
+
+/******************************************************************************************************************/
+VISIBILITY/ENCAPSULATION: 
+- public vs private
+- ^-- these terms allows me to control the attributes of the class
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# define SAMPLE_CLASS_H
+
+class	Sample {
+
+	public: 
+
+		int		publicfoo;
+
+		Sample(void);
+		~Sample(void);
+
+		void	bar(void) const;
+
+	private: <-- everything in private is invisible, define what part of the class user can access
+					^-- only the class can use stuff in private, use _ as a conventional nomenclature
+
+		int		_privateFoo;
+
+		void	_privateBar(void) const;
+}; 
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void) {
+	std::cout << "Constructor called" << std::endl;
+
+	this->publicFoo = 0;
+	std::cout << "this->publicFoo: " << this->publicFoo << std::endl;
+	this->_privateFoo = 0;
+	std::cout << "this->_privateFoo: " << this->_privateFoo << std::endl;
+
+	this->publicBar();
+	this->_privateBar();
+
+	return;
+}
+
+void	Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+void	Sample:publicBar(void) const {
+	std::cout << "Member function publicBar called" << std::endl;
+}
+
+void	Sample:_privateBar(void) const {
+	std::cout << "Member function _privateBar called" << std::endl;
+}
+
+
+
+int	main() {
+	
+	Sample instance;
+
+	instance.publicFoo = 42;
+	std::cout << "instance.publicFoo: " << instance.publicFoo << std::endl;
+	//instance._privateFoo = 42; <-- wont compile/work because its private, only class can access it
+	//std::cout << "instance._privateFoo: " << instance._privateFoo << std::endl;
+
+	instance.publicBar();
+	//instance._privateBar();
+}
+
+/******************************************************************************************************************/
+CLASS VS STRUCT:
+- C++ has structure that you may know from C
+- Principle of structures has been extended
+- Structure and classes works exactly the same in C++
+- Struct doesn't need visibility to be stated (public/private)
+- But class requires you to have public/private, or its auto private
+- Scope of struct is public by default
+- Scope of class is private by default
+
+FILE: SAMPLE1.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+struct	Sample1 {
+	int foo;
+
+	Sample1(void);
+	~Sample1(void);
+
+	void	bar(void) const;
+}
+
+#endif
+
+/******************************************************************************************************************/
+ACCESSOR:
+
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# DEFINE SAMPLE_CLASS_H
+
+class Sample {
+	
+	public:
+
+		Sample(void);
+		~Sample(void);
+
+		int		getFoo(void) const; <-- this will get the private foo var, we also set const so they cant edit
+		void	setFoo(int v); <-- this will set private foo var, nomenclature is get/set followed by var name
+
+	private:
+
+		int		_foo; <-- prevents users from accessing this directly
+}
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void) {
+	std::cout << "Constructor called" << std::endl;
+
+	this->setFoo(0);
+	std::cout << "this-getFoo(): " << this->getFoo() << std::endl;
+
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+int	Sample:getFoo(void) const{
+	return (this->_foo);
+}
+
+void	Sample::setFoo(int v){
+	if (v >= 0)
+		this->_foo = v;
+
+	return ;
+}
+
+
+int	main(){
+	
+	Sample instance;
+
+	instance.setFoo(42);
+	std::cout << "instance.getFoo(): " << instance.getFoo() << std::endl;
+	instance.setFoo(-42);
+	std::cout << "instance.getFoo(): " << instance.getFoo() << std::endk;
+
+	return (0);
+}
+
+/******************************************************************************************************************/
+COMPARISONS:
+- Comparison syntax in C++
+
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# DEFINE SAMPLE_CLASS_H
+
+class Sample {
+	
+	public:
+
+		Sample(int v);
+		~Sample(void);
+
+		int		getFoo(void) const;
+		int		compare(Sample * other) const; <-- takes address of sample instance so it will
+													compare current instance and passed instance
+
+	private:
+
+		int		_foo;
+}
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void) {
+	std::cout << "Constructor called" << std::endl;
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+int	Sample:getFoo(void) const{
+	return (this->_foo);
+}
+
+void	Sample:compare(Sample * other)){
+	if (this->_foo < other->getFoo())
+		return (-1);
+	else if (this->_foo > other->getFoo())
+		return (1);
+	return ;
+}
+
+
+int		main() {
+
+	Sample instance1(42);
+	Sample instance2(42);
+
+	if (&instance1 == &instance1)
+		std::cout << "instance1 and instance1 are physically equal" << std::endl;
+	else
+		std::cout << "instance1 and instance1 are not physically equal" << std::endl;
+
+	if (&instance1 == &instance2)
+		std::cout << "instance1 and instance2 are physically equal" << std::endl;
+	else
+		std::cout << "instance1 and instance2 are not physically equal" << std::endl;
+
+	if (instance1.compare(&instance1) == 0)
+		std::cout << "instance1 and instance1 are physically equal" << std::endl;
+	else
+		std::cout << "instance1 and instance1 are not physically equal" << std::endl;
+
+	if (instance1.compare(&instance2) == 0)
+		std::cout << "instance1 and instance2 are physically equal" << std::endl;
+	else
+		std::cout << "instance1 and instance2 are not physically equal" << std::endl;
+
+	return (0);
+}
+
+/******************************************************************************************************************/
+NON MEMBER ATTRIBUTES & NON MEMBER FUNCTIONS:
+- Static has a new symantix
+
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# DEFINE SAMPLE_CLASS_H
+
+class Sample { 
+	
+	public:
+
+		Sample(int v);
+		~Sample(void);
+
+		static int		getNbInst(void); <-- nb is nonmember
+
+	private:
+
+		static int		_nbInst; <-- how many instances has been made?
+}
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+NOTE: CANNOT USE THIS-> POINTER BECAUSE THE REFERENCE VARIABLE IS STATIC, SO YOU CANNOT USE THIS->
+
+Sample::Sample(void) {
+	std::cout << "Constructor called" << std::endl;
+	Sample::_nbInst += 1;
+
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+	Sample::_nbInst -= 1;
+
+	return;
+}
+
+int	Sample:getNbInst(void) const{
+	return (Sample::_nbInst);
+}
+
+int	Sample::_nbInst = 0;
+
+
+/******************************************************************************************************************/
+POINTERS TO MEMBERS:
+- Pointer on members, and pointer on member functions
+
+FILE: SAMPLE.CLASS.HPP
+
+#ifndef SAMPLE_CLASS_H
+# DEFINE SAMPLE_CLASS_H
+
+class Sample { 
+	
+	public:
+
+		int		foo;
+
+		Sample(int v);
+		~Sample(void);
+
+		void	bar(void) const;
+}
+
+#endif
+
+
+FILE: SAMPLE.CLASS.CPP
+
+#include <iostream>
+#include "Sample.class.hpp"
+
+Sample::Sample(void) {
+	std::cout << "Constructor called" << std::endl;
+
+	return;
+}
+
+Sample::~Sample(void){
+	std::cout << "Destructor called" << std::endl;
+
+	return;
+}
+
+void	Sample::bar(void) const {
+	std::cout << "Member function bar called" << std:endl;
+
+	return;
+}
+
+
+int		main(){
+	
+	Sample	instance; <-- allocated on stack
+	Sample*	instancep = &instance; <-- pointered declared on the stack
+
+	int		Sample::*p = NULL; <-- pointer on member attribute of sample class
+									(similar to int *p = NULL;)
+	void	(Sample::*f)(void) const;
+
+	p = &Sample::foo;
+
+	std::cout << "Value of member foo: " << instance.foo << std::endl;
+	instance.*p = 21;
+	std::cout << "Value of member foo: " << instance.foo << std::endl;
+	instancep->*p = 42;
+	std::cout << "Value of member foo: " << instance.foo << std:: endl;
+
+	f = &Sample::bar;
+
+	(instance.*f)();
+	(instancep->*f)();
+
+	return (0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

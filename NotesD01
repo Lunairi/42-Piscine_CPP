@@ -1,0 +1,224 @@
+Notes for CPP Piscine Day 01 (We use C++ 98)
+
+/******************************************************************************************************************/
+NEW AND DELETE:
+- Memory allocation and homologue delete (malloc/free)
+- Malloc doesn't call constructors which means it can cause your class to blow up
+- Use New and Delete instead
+
+#include <iostream>
+#include <string>
+
+class Student
+{
+	private:
+		std::string _login;
+
+	public:
+		Student(std::string login) : _login(login)
+		{
+			std::cout << "Student " << this->_login << " is born" << std::endl;
+		}
+
+		~Student()
+		{
+			std::cout << "Student " << this->_login << " died" << std::endl;
+		}
+};
+
+int	main()
+{
+	Student		bob = Student("bfubar"); <-- allocated on stack
+	Student		*jim = new Student("jfubar")l <-- allocated on heap
+
+	// Do Shit here
+
+	delete jim; // jim has been destroyed 
+
+	return (0); // bob has been destroyed
+}
+
+
+VERSION 2:
+
+#include <iostream>
+#include <string>
+
+class Student
+{
+	private:
+		std::string _login;
+
+	public:
+		Student() : _login("ldefault")
+		{
+			std::cout << "Student " << this->_login << " is born" << std::endl;
+		}
+
+		~Student()
+		{
+			std::cout << "Student " << this->_login << " died" << std::endl;
+		}
+};
+
+int	main()
+{
+	Student	*student = new Student[42]; <-- number of students i want to allocate
+
+	// Do shit here
+
+	delete [] students;
+}
+
+/******************************************************************************************************************/
+REFERENCES:
+- Does what * and & but its called reference
+- Its an aliases for an existing variable
+- A pointer that is constant and is unreferenced and is never void
+
+#include <iostream>
+
+int main()
+{
+	int		numberOfBalls = 42;
+
+	int	*ballsPtr = &numberofBalls; <-- ptr is pointer to the address of numberofBalls
+	int	&ballsRef = numberofBalls; <-- ref is reference pointed onto the variable numberofBalls
+										cannot create a reference that isn't referencing anything
+										because it cannot be void. So you cannt do int &ballsRef
+										unless you know what it wants to reference something.
+
+	std::cout << numberOfBalls << " " << *ballsPtr << " " << ballsRef << std::endl; <-- should display 42 42 42 and
+																						don't need to write & in front
+																						of ballsRef to show what its referencing
+
+	*ballsPtr = 21;
+	std::cout << numberOfBalls << std::endl; <-- should display 21
+	ballsRef = 84; <-- does need to be &ballsRef or *ballsRef, just ballsRef
+	std::cout << numberOfBalls << std::endl; <-- should display 84
+
+	return (0);
+}
+
+EXAMPLE 2
+
+#include <string>
+
+void	byPtr(std::string *str)
+{
+	*str += " and ponies";
+}
+
+void	byConstPtr(std::string const *str)
+{
+	std::cout << *str << std:endl;
+}
+
+void	byRef(std::string &str)
+{
+	str += " and ponies";
+}
+
+void	byConstRef(std::string const &str)
+{
+	std::cout << str << std::endl;
+}
+
+int		main()
+{
+	std::string str = "i like butterflies";
+
+	std::cout << str << std::endl;
+	byPtr(&str); <-- should append " and ponies"
+	byConstPtr(&str); <-- will print out the entire string
+
+	str = "i like otters"; <-- reset string
+
+	std::cout << str << std::endl;
+	byRef(str); <-- should append " and ponies"
+	byConstRef(str); <-- will print out the entire string
+
+	return (0);
+}
+
+EXAMPLE 3
+
+#include <iostream>
+#include <string>
+
+class	Student
+{
+	private:
+		std::string _login;
+
+	public:
+		Student(std::string const &login) : _login(login)
+		{
+		}
+
+		std::string			&getLoginRef()
+		{
+			return (this->_login);
+		}
+
+		std::string const	&getLoginRefConst() const
+		{
+			return (this->login);
+		}
+
+		std::string			*getLoginPtr()
+		{
+			return &(this->_login);
+		}
+
+		std::string const	*getLoginPtrConst() const
+		{
+			return &(this->_login);
+		}
+};
+
+int main()
+{
+	Student			bob = Student("bfubar");
+	Student const	jim = Student("jfubar");
+
+	std::cout << bob.getLoginRefConst() << " " << jim.getLoginRefConst() << std::endl;
+	std::cout << *(bob.getLoginPtrConst()) << " " << *(jim.getLoginPtrConst()) << std::endl;
+
+	bob.getLoginRef() = "bobfubar";
+	std::cout << bob.getLoginRefConst() << std::endl;
+
+	*(bob.getLoginPtr()) = "bobbyfubar";
+	std::cout << bob.getLoginRefConst() << std::endl;
+}
+
+/******************************************************************************************************************/
+FILESTREAMS:
+
+#include <iostream>
+#include <fstream> <-- input file stream
+
+int main()
+{
+	std::ifstream		ifs("numbers"); <-- input file stream = ifs
+											this is literally create an input
+											file stream, than call it numbers
+	unsigned int		dst;
+	unsigned int		dst2;
+	ifs >> dst >> dst2; <-- will store these inside the ifs stream
+
+	std::cout << dst << " " << dst2 << std::endl;
+	ifs.close(); <-- closes the file
+
+	//--------------------------
+
+	std::ofstream		ofs("test.out"); <-- output file stream = ofs
+
+	ofs << "i like ponies a whole damn lost" << std::endl;
+	ofs.close();
+}
+
+
+
+
+
