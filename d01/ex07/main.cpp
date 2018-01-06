@@ -39,7 +39,13 @@ void	parse_input(std::string file, std::string s1, std::string s2)
 	{
 		std::ofstream	ofs(output);
 		while (getline(ifs, line))
+		{
+			if (i != 0)
+				input = input + '\n';
 			input = input + line;
+			i++;
+		}
+		i = 0;
 		while (replace_word(&input, s1, s2, &i));
 		ofs << input << std::endl;
 		std::cout << "You've replaced the word [" << s1 << "] with [" << s2 << "] " <<
