@@ -63,7 +63,7 @@ int 	main(int ac, char **av)
 	if (ac != 4)
 	{
 		std::cout << "How to use replace:" << std::endl <<
-			"./replace [FILENAME] [STRING_ONE] [STRING_TWO]" << std::endl;
+			"./replace [FILENAME] [WORD TO FIND] [WORD TO REPLACE WITH]" << std::endl;
 		return (0);
 	}
 	parse_input(av[1], av[2], av[3]);
