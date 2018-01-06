@@ -216,6 +216,11 @@ int			main(void)
 		std::cout << "Commands: ADD - SEARCH - EXIT" << std::endl;
 		std::cout << "> ";
 		std::getline(std::cin, input);
+		if (std::cin.eof())
+		{
+			std::cout << "CTRL + D pressed, ending program. Good bye." << std::endl;
+			return (0);
+		}
 		if (check_commands(input, instance, &total))
 			return (0);
 	}
