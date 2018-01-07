@@ -76,6 +76,7 @@ int		main(int ac, char **av)
 			ifs.close();
 		}
 		i++;
+		y = 1;
 	}
 	return (0);
 }
