@@ -15,7 +15,7 @@
 #include <ctime>
 #include "Human.hpp"
 
-void Human::meleeAttack(std::string const & target)
+void Human::meleeAttack(std::string const &target)
 {
 	srand(time(0));
 	int i = rand();
@@ -30,7 +30,7 @@ void Human::meleeAttack(std::string const & target)
 		std::cout << "You use the legendary Excalibur of King Author to strike down " << target << std::endl;
 }
 
-void Human::rangedAttack(std::string const & target)
+void Human::rangedAttack(std::string const &target)
 {
 	srand(time(0));
 	int i = rand();
@@ -45,7 +45,7 @@ void Human::rangedAttack(std::string const & target)
 		std::cout << "You use the mythical korean bow Gakgung to shoot down " << target << std::endl;
 }
 
-void Human::intimidatingShout(std::string const & target)
+void Human::intimidatingShout(std::string const &target)
 {
 	srand(time(0));
 	int i = rand();
@@ -60,7 +60,7 @@ void Human::intimidatingShout(std::string const & target)
 		std::cout << "You begin shouting and rapping 'Eminem RapGod' five times in a row without breathing at " << target << std::endl;
 }
 
-void Human::action(std::string const & action_name, std::string const & target)
+void Human::action(std::string const &action_name, std::string const &target)
 {
 	int i = 0;
 
