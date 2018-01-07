@@ -1,0 +1,292 @@
+Notes for CPP Piscine Day 02 (We use C++ 98)
+
+Ad-hoc Polymorphism: Function overload (many function with same name but diff parameter)
+Operator Overload: Notion relating to the previous one, and expanding C++ syntax and operators
+Canonical Form: A form of a class, principle of declaring classes/constructors/members/etc. Allowing unified use of all classes.
+
+/******************************************************************************************************************/
+AD-HOC POLYMORPHISM:
+- AKA Function Overloading
+- A C++ Principle allows you to define many function with same name but with different parameter
+
+FILE: SAMPLE.CLASS.HPP
+
+class Sample 
+{
+	
+	public:
+
+			Sample(void);
+			~Sample(void);
+
+			void	bar(char const c)		const;
+			void	bar(int const n)		const;
+			void	bar(float const z)		const;
+			void	bar(Sample const &i)	const;
+};
+
+FILE: SAMPLE.CLASS.CPP
+
+Sample::Sample(void) 
+{
+	std::cout << "Constructor called" << std::endl;
+	return;
+}
+
+Sample::~Sample(void) 
+{
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+void	Sample::bar(char const c) const 
+{
+	std::cout << "Member function bar called with char overload : " << c << std::endl;
+	return;
+}
+
+void	Sample::bar(int const n) const 
+{
+	std::cout << "Member function bar called with int overload : " << n << std::endl;
+	return;
+}
+
+void	Sample::bar(float const c) const 
+{
+	std::cout << "Member function bar called with float overload : " << z << std::endl;
+	return;
+}
+
+void	Sample::bar(Sample const &i) const 
+{
+	std::cout << "Member function bar called with Sample overload : " << i << std::endl;
+	return;
+}
+
+/******************************************************************************************************************/
+OPERATOR OVERLOAD:
+
+1 + 1 <-- infix notation (because of + operator is between the two operand)
++ 1 1 <-- prefix (functional notation), also aka +(1, 1) 
+1 1 + <-- postfix (stack calculation, reverse polish notation)
+
++(1, 1) 
+1.+(1)
+
+FILE: INTEGER.CLASS.HPP
+
+class	Integer
+{
+	public:
+
+		Integer(int const n);
+		~Integer(void);
+
+		int	getValue(void) const;
+
+		Integer	&operator=(Integer const &rhs); <-- allow a = b = c = d;
+		Integer	operator+(Integer const &rhs) const; <-- 1 + 2 + 3 + 4
+
+	private:
+
+		int _n;
+};
+
+std::ostream & operator<<(std::ostream &o, Integer const &rhs);
+
+
+FILE: INTEGER.CLASS.CPP
+
+Integer::Integer(int const n) : _n(n)
+{
+	std::cout << "Constructor callde with value " << n << std::endl;
+	return;
+}
+
+Integer::~Integer(void)
+{
+	std::cout << "Destructor called with value " << this->_n << std::endl;
+	return;
+}
+
+int		Integer::getValue(void) const
+{
+	return (this->_n);
+}
+
+Integer &Integer::operator=(Integer const &rhs)
+{
+	std::cout << "Assignation operator called from " << this->_n;
+	std::cout << " to " << rhs.getValue() << std::endl;
+
+	this->_n = rhs.getValue();
+
+	return (*this)
+}
+
+Integer	Integer::operator+(Integer const &rhs) const 
+{
+	std::cout << "Assignation operator called with " << this->_n;
+	std::cout << " and " << rhs.getValue() << std::endl;
+
+	return (Integer(this->_n + rhs.getValue()));
+}
+
+std::ostream	&operator<<(std::ostream &o, Integer const &rhs)
+{
+	o << rhs.getValue();
+	return (o);
+}
+
+FILE: MAIN.CPP
+
+int	main()
+{
+	Integer	x(30);
+	Integer	y(10);
+	Integer	z(0);
+
+	std::cout << "Value of x : " << x << std::endl; <-- the << is overloaded by the std::ostream <<
+	std::cout << "Value of y : " << y << std::endl;
+	y = Integer(21);
+	std::cout << "Value of y : " << y << std::endl;
+
+	std::cout << "Value of z : " << z << std::endl;
+	z = x + y;
+	std::cout << "Value of z : " << z << std::endl;
+
+	return (0);
+}
+
+OUTPUT RESULTS:
+Constructor called with value 30
+Constructor called with value 10
+Constructor called with value 0
+Value of x : 30
+Value of y : 10
+Constructor called wth value 12
+Assignment operator called from 10 to 12
+Destructor called with value 12
+Value of y : 12
+Value of z : 0
+Additional operator called with 30 and 12
+Constructor called with value 42
+Assignment operator called from 0 to 42
+Destructor called with value 42
+Value of z : 42
+Destructor called with value 42
+Destructor called with value 12
+Destructor called with value 30
+
+Rules: 
+- Overload must be natural
+- Behavior of the operator is strange, avoid it
+- Overload of operator must be related to the syntax of the operator
+- Just don't do it (even if it sounds a good idea, it probably isn't)
+- Case where operator overload is justified is rare
+
+/******************************************************************************************************************/
+CANONICAL FORM: (COPLIEN FORM)
+- Better structure/norm than a C++ function
+
+FILE: SAMPLE.CLASS.HPP
+
+class	Sample
+{
+	
+	public:
+
+		Sample(void);								// Canonical
+		Sample(int const n);
+		Sample(Sample const &src);					// Canonical
+		~Sample(void);								// Canonical
+
+		Sample	&operator=(Sample const &rhs);		// Canonical
+
+		int	getFoo(void) const;
+
+	private:
+
+		int	_foo;
+};
+
+std::ostream	&operator<<(std::ostream &o, Sample const &i);
+
+
+FILE: SAMPLE.CLASS.CPP
+
+Sample::Sample(void) : _foo(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+	return;
+}
+
+Sample::Sample(int const n) : _foo(n)
+{
+	std::cout << "Parametric constructor called" << std::endl;
+	return;
+}
+
+Sample::Sample(Sample const &src)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = src;
+	return;
+}
+
+Sample::~Sample(void)
+{
+	std::cout << "Destructor called" << std::endl;
+	return;
+}
+
+int		Sample::getFoo(void) const
+{
+	return (this->_foo);
+}
+
+Sample	&Sample::operator=(Sample const &rhs)
+{
+	std::cout << "Assignment operator called" << std::endl;
+
+	if (this != &rhs)
+		this->_foo = rhs.getFoo();
+
+	return (*this);
+}
+
+FILE: MAIN.CPP
+
+int		main()
+{
+	Sample	instance1;
+	Sample	instance2(42);
+	Sample	instance3(instance1);
+
+	std::cout << instance1 << std::endl;
+	std::cout << instance2 << std::endl;
+	std::cout << instance2 << std::endl;
+
+	instance3 = instance2;
+	std::cout << instance3 << std::endl;
+}
+
+OUTPUT RESULT:
+Default constructor called
+Parametric constructor called
+Copy constructor called
+Assignemnt operator called
+The value of _foo is : 0
+The value of _foo is : 42
+The value of _foo is : 0
+Assignment operator aclled
+The value of _foo is : 42
+Destructor called
+Destructor called
+Destructor called
+
+
+
+
+
+
