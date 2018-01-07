@@ -10,12 +10,15 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef CONTACT_H
-# define CONTACT_H
+#ifndef LOGGER_H
+# define LOGGER_H
 
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
 
 class	Logger 
 {
@@ -25,12 +28,12 @@ class	Logger
 		Logger();
 		~Logger();
 
-		void			log(std::string const & dest, std::string const & message);
+		void			log(std::string const &dest, std::string const &message);
 
 	private:
-		
-		void			logToConsole(std::string input);
-		void			logToFile(std::string input);
+
+		void			logToConsole(std::string const &input);
+		void			logToFile(std::string const &input);
 		std::string		makeLogEntry(std::string message);
 
 
