@@ -4,7 +4,7 @@ My piscine CPP work, doing these early in advance
 Progress:
 - Day00 3/3
 - Day01 11/11
-- Day02 0/5
+- Day02 3/4 (Put ex04 on hold)
 - Day03 0/5
 - Day04 0/5
 - Day05 0/6
