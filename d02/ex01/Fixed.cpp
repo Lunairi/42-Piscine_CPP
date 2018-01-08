@@ -35,17 +35,20 @@ Fixed::Fixed(int const input)
 {
 	std::cout << "Int constructor called" << std::endl;
 	setRawBits(input << this->_num);
+	return;
 }
 
 Fixed::Fixed(float const input)
 {
 	std::cout << "Float constructor called" << std::endl;
 	setRawBits(roundf(input * (1 << this->_num)));
+	return;
 }
 
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
+	return;
 }
 
 Fixed	&Fixed::operator=(Fixed const &r)
@@ -65,6 +68,7 @@ int		Fixed::getRawBits(void) const
 void	Fixed::setRawBits(int const raw)
 {
 	this->_value = raw;
+	return;
 }
 
 int		Fixed::toInt(void) const

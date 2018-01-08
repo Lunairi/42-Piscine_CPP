@@ -34,6 +34,7 @@ Fixed::Fixed(Fixed const &input)
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
+	return;
 }
 
 Fixed	&Fixed::operator=(Fixed const &r)
@@ -55,6 +56,7 @@ void	Fixed::setRawBits(int const raw)
 {
 	std::cout << "Assignment operator called" << std::endl;
 	this->_value = raw;
+	return;
 }
 
 int	const	Fixed::_num = 8;
