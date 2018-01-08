@@ -46,6 +46,9 @@ Fixed::~Fixed(void)
 	return;
 }
 
+/*
+** Below are _value manipulation
+*/
 
 int		Fixed::getRawBits(void) const
 {
@@ -68,12 +71,9 @@ float	Fixed::toFloat(void) const
 	return ((float)getRawBits() / (1 << this->_num));
 }
 
-Fixed	&Fixed::operator=(Fixed const &r)
-{
-	if (this != &r)
-		this->_value = r.getRawBits();
-	return (*this);
-}
+/*
+** Below are bool expression operations
+*/
 
 bool	Fixed::operator>(Fixed const &r)
 {
@@ -103,6 +103,17 @@ bool	Fixed::operator==(Fixed const &r)
 bool	Fixed::operator!=(Fixed const &r)
 {
     return (this->toFloat() != r.toFloat());
+}
+
+/*
+** Below are basic math arithmetic operations
+*/
+
+Fixed	&Fixed::operator=(Fixed const &r)
+{
+	if (this != &r)
+		this->_value = r.getRawBits();
+	return (*this);
 }
 
 Fixed	Fixed::operator+(Fixed const &r)
@@ -160,6 +171,10 @@ Fixed	Fixed::operator--(int input)
 	this->_value = this->_value - 1;
 	return (fminus);
 }
+
+/*
+** Below are min/max operations
+*/
 
 Fixed	&Fixed::min(Fixed &l, Fixed &r)
 {
