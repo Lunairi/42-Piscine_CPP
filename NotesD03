@@ -1,0 +1,116 @@
+Notes for CPP Piscine Day 03 (We use C++ 98)
+
+/******************************************************************************************************************/
+INHERITANCE/HERITAGE:
+
+class	Cat
+{
+	private:
+		int		_numberOfLegs;
+
+	public:
+		Cat()
+		Cat(Cat const &);
+		Cat& operator=(Cat const &);
+		~Cat();
+
+		void	run(int distance);
+
+		void	scornSomeone(std::string const & target);
+};
+
+class	Pony
+{
+	private:
+		int		_numberOfLegs;
+
+	public:
+		Pony();
+		Pony(Pony cost &);
+		Pony& operator=(Pony const &);
+		~Pony();
+
+		void	run(int distance);
+
+		void	doMagic(std::string const & target);
+};
+
+If we want to make many of these for each animal we have to re-write everything
+but with heritage we don't have to do that, example below
+
+class	Animal
+{
+	private:
+		int		_numberOfLegs;
+
+	public:
+		Animal();
+		Animal(Animal const &);
+		Animal& operator=(Animal const &);
+		~Animal();
+
+		void	run(int distance);
+		void	call();
+		void	eat(std::string const & what);
+		void	walk(int distance);
+};
+
+class	Cat : public Animal <--- heritage
+{
+	public:
+		Cat()
+		Cat(Cat const &);
+		Cat& operator=(Cat const &);
+		~Cat();
+
+		void	scornSomeone(std::string const & target);
+};
+
+class	Otter : public Animal
+{
+	public:
+		Otter()
+		Otter(Otter const &);
+		Otter& operator=(Otter const &);
+		~Otter();
+
+};
+
+class	Pony : public Animal
+{
+	public:
+		Pony();
+		Pony(Pony cost &);
+		Pony& operator=(Pony const &);
+		~Pony();
+
+		void	doMagic(std::string const & target);
+};
+
+ANOTHER EXAMPLE
+
+class Quadruped // Can access name, run() and legs
+{
+	private:
+		std::string		name; // Only accessible from Quadruped object
+
+	protected:
+		Leg				legs[4]; // Accessible from quadruped or derived object
+
+	public:
+		void			run(); // Accessible from wherever
+}
+
+class Dog : public Quadruped // can access run() and legs
+{
+}
+
+int main() // can only access run()
+{
+}
+
+
+Diamond heritage?
+
+
+
