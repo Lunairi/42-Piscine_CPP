@@ -16,7 +16,6 @@
 
 Contact::Contact(void) 
 {
-	std::cout << "Welcome to your awesome phonebook!" << std::endl;
 	return;
 }
 

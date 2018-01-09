@@ -208,8 +208,9 @@ int			main(void)
 	int i = 1;
 	int total = 0;
 	std::string input = " ";
-	Contact *instance = new Contact();
+	Contact instance[8];
 
+	std::cout << "Welcome to your awesome phonebook!" << std::endl;
 	while (i)
 	{
 		std::cout << "What would you like to do?" << std::endl;
