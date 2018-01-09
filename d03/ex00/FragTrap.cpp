@@ -25,6 +25,13 @@ FragTrap::FragTrap(void) : _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), _n
 	return;
 }
 
+FragTrap::FragTrap(std::string name) : _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), _name(name), _patk(30), _ratk(20), _armor(5)
+{
+	srand(time(0));
+	std::cout << "Parameter Constructor Called: [" << this->_name << "] The vault is... This way!" << std::endl;
+	return;
+}
+
 FragTrap::FragTrap(FragTrap &obj)
 {
 	srand(time(0));

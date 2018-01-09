@@ -39,8 +39,12 @@ int	main()
 	trapone.vaulthunter_dot_exe("More Skags");
 	traptwo.vaulthunter_dot_exe("Even More Skags");
 
+	FragTrap trapthree("Stacy");
+	std::cout << std::endl;
+
 	trapone.displayStats();
 	traptwo.displayStats();
+	trapthree.displayStats();
 	
 	return (0);
 }
