@@ -28,6 +28,7 @@ class	FragTrap
 		FragTrap(void);
 		FragTrap(FragTrap &obj);
 		virtual ~FragTrap(void);
+		FragTrap &operator=(FragTrap const &r);
 
 		void	rangedAttack(std::string const &target);
 		void	meleeAttack(std::string const &target);
@@ -43,8 +44,6 @@ class	FragTrap
 		void	shhhhTrap(std:: string const &target);
 		void	rubberDucky(std:: string const &target);
 		void	senselessSacrifice(std:: string const &target);
-
-		FragTrap &operator=(FragTrap const &r);
 
 	private:
 
