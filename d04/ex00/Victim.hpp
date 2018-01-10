@@ -31,7 +31,7 @@ class	Victim
 		virtual ~Victim(void);
 		Victim &operator=(Victim const &r);
 
-		void	getPolymorphed(void) const;
+		virtual void	getPolymorphed(void) const;
 
 		std::string		getName(void) const;
 

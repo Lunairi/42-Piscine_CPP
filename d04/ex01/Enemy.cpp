@@ -66,3 +66,9 @@ void			Enemy::takeDamage(int amount)
 		this->_hp = 0;
 	return;
 }
+
+void			Enemy::setHP(int i)
+{
+	this->_hp = i;
+	return;
+}

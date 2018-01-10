@@ -18,7 +18,7 @@
 #include <fstream>
 #include "AWeapon.hpp"
 
-AWeapon::AWeapon(std::string const &name, int apcost, int damage) : _name(name), _ap(apcost), _dmg(dmg)
+AWeapon::AWeapon(std::string const &name, int apcost, int damage) : _name(name), _ap(apcost), _dmg(damage)
 {
 	return;
 }

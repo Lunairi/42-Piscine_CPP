@@ -18,7 +18,7 @@
 #include <fstream>
 #include "Character.hpp"
 
-Character::Character(std::string const &name) : _name(name), _ap(40);
+Character::Character(std::string const &name) : _name(name), _ap(40), _weapon(NULL)
 {
 	return;
 }
@@ -42,19 +42,26 @@ Character &Character::operator=(Character const &r)
 	return (*this);
 }
 
-std::string		Character::getName() const
+std::string		Character::getName(void) const
 {
 	return (this->_name);
 }
 
-int				Character::getAP() const
+int				Character::getAP(void) const
 {
 	return (this->_ap);
 }
 
-AWeapon			*Character::getWeapon() const
+AWeapon			*Character::getWeapon(void) const
 {
 	return (this->_weapon);
+}
+
+void			Character::recoverAP(void)
+{
+	this->_ap = this->_ap + 10;
+	if (this->_ap > 40)
+		this->_ap = 40;
 }
 
 void			Character::equip(AWeapon *weapon)
@@ -65,17 +72,18 @@ void			Character::equip(AWeapon *weapon)
 
 void			Character::attack(Enemy *enemy)
 {
+	if(!enemy->getHP())
+		return;
 	if (this->_weapon)
 	{
-		if (this->_ap > this->_weapon->getAPCost())
+		if (this->_ap != 0 && (this->_ap >= this->_weapon->getAPCost()))
 		{
 			std::cout << this->_name << " attacks " << enemy->getType() << " with a " << this->_weapon->getName() << std::endl;
 			this->_weapon->attack();
 			enemy->takeDamage(this->_weapon->getDamage());
+			this->_ap = this->_ap - this->_weapon->getAPCost();
 			if (enemy->getHP() <= 0)
 				delete enemy;
-
-			this->_ap = this->_ap - this->_weapon->getAPCost();
 		}
 	}
 	return;
@@ -83,9 +91,9 @@ void			Character::attack(Enemy *enemy)
 
 std::ostream	&operator<<(std::ostream &o, Character const &r)
 {
-	if (this->weapon)
-		o << this->_name << " has " << this->_ap << " and wields a " << this->_weapon->getName() << std::endl;
+	if (r.getWeapon())
+		o << r.getName() << " has " << r.getAP() << " AP and wields a " << r.getWeapon()->getName() << std::endl;
 	else
-		o << this->_name << " has " << this->_ap << " and is unarmed" << std::endl;
-	return;
+		o << r.getName() << " has " << r.getAP() << " AP and is unarmed" << std::endl;
+	return (o);
 }

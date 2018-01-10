@@ -31,10 +31,9 @@ class	Enemy
 		virtual ~Enemy(void);
 		Enemy &operator=(Enemy const &r);
 
-		virtual void	attack() const = 0;
-
-		std::string		getType() const;
-		int				getHP() const;
+		std::string		getType(void) const;
+		int				getHP(void) const;
+		void			setHP(int i);
 
 		virtual void	takeDamage(int);
 

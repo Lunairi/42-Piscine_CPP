@@ -31,7 +31,7 @@ class	PlasmaRifle : public AWeapon
 		virtual ~PlasmaRifle(void);
 		PlasmaRifle &operator=(PlasmaRifle const &r);
 
-		void	attack(void);
+		void	attack(void) const;
 
 };
 

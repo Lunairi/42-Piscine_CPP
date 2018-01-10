@@ -45,5 +45,45 @@ int main()
 	zaz->attack(b);
 	std::cout << *zaz;
 
+	std::cout << std::endl << std::endl << "My custom testing: " << std::endl;
+
+	Character	*Arta = new Character("Arta");
+	std::cout << *Arta;
+
+	Enemy	*golem = new SuperMutant();
+	Enemy	*bug = new RadScorpion();
+
+	AWeapon *fist = new PowerFist();
+
+	std::cout << "** Will attempt attacking with no weapon, nothing will happen **" << std::endl << std::endl;
+	Arta->attack(golem);
+	std::cout << *Arta;
+
+	Arta->equip(fist);
+
+	std::cout << std::endl << "** Attacking Golem - Super Mutant **" << std::endl << std::endl;
+	Arta->attack(golem);
+	std::cout << *Arta;
+	Arta->attack(golem);
+	std::cout << *Arta;
+	Arta->attack(golem);
+	std::cout << *Arta;
+	std::cout << std::endl << "** Golem - Super Mutant is dead, so when Arta tries to attack it will show no combat has been done and AP remains unchanged **" << std::endl;
+	std::cout << std::endl;
+	Arta->attack(golem);
+	std::cout << *Arta;
+	Arta->attack(golem);
+	std::cout << *Arta;
+
+	std::cout << std::endl << "** Attacking Bug - RadScorpion, should run out of AP and shows no combat happens **" << std::endl << std::endl;
+	Arta->attack(bug);
+	std::cout << *Arta;
+	Arta->attack(bug);
+	std::cout << *Arta;
+	std::cout << std::endl << "** Recovering AP now in order to combat **" << std::endl << std::endl;
+	Arta->recoverAP();
+	Arta->attack(bug);
+	std::cout << *Arta;
+
 	return 0;
 }

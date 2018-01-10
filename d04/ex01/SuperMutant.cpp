@@ -43,18 +43,18 @@ SuperMutant &SuperMutant::operator=(SuperMutant const &r)
 	return (*this);
 }
 
-void			Enemy::takeDamage(int amount)
+void			SuperMutant::takeDamage(int amount)
 {
 	int i = 0;
 
 	if (amount < 3)
 		return;
-	else if (amount > (this->_hp + 3) )
-		i = this->_hp + 3;
+	else if (amount > (this->getHP() + 3) )
+		i = this->getHP() + 3;
 	else
 		i = amount;
-	this->_hp = this->_hp - i + 3;
-	if (this->_hp < 0)
-		this->_hp = 0;
+	this->setHP(this->getHP() - i + 3);
+	if (this->getHP() < 0)
+		this->setHP(0);
 	return;
 }

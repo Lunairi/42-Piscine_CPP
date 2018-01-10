@@ -33,13 +33,13 @@ class	Character
 		virtual ~Character(void);
 		Character &operator=(Character const &r);
 
-		void			recoverAP();
+		void			recoverAP(void);
 		void			equip(AWeapon*);
 		void			attack(Enemy*);
 
-		std::string		getName() const;
-		int				getAP() const;
-		AWeapon			*getWeapon() const;
+		std::string		getName(void) const;
+		int				getAP(void) const;
+		AWeapon			*getWeapon(void) const;
 
 	private:
 		std::string		_name;
