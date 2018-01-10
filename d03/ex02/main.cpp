@@ -41,6 +41,9 @@ int	main()
 
 	trapone.vaulthunter_dot_exe("Skags");
 	scavone.challengeNewcomer();
+
+	FragTrap traptwo(trapone);
+	ScavTrap scavtwo(scavone);
 	
 	return (0);
 }

@@ -45,7 +45,7 @@ ScavTrap::ScavTrap(ScavTrap &obj)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "SC4V-TP estructor Called: [" << this->name << "] Oh god I can't stop!" << std::endl;
+	std::cout << "SC4V-TP Destructor Called: [" << this->name << "] Oh god I can't stop!" << std::endl;
 	return;
 }
 
