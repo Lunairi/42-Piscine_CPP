@@ -1,0 +1,135 @@
+Notes for CPP Piscine Day 04 (We use C++ 98)
+
+/******************************************************************************************************************/
+SUB-TYPING POLYMORPHISM:
+
+class	Character
+{
+	public:
+		void	sayHello(std::string const &target);
+};
+
+class	Warrior : public Character
+{
+	public:
+		void	sayHello(std::string const &target);
+};
+
+class	Cat
+{
+	//[...]
+
+};
+
+void	Character::sayHello(std::string const &target)
+{
+	std::cout << "Hello " << target << " !" << std::endl;
+}
+
+void	Warrior::sayHello(std::string const &target)
+{
+	std::cout << "F*** off " << target << " , I don't like you !" << std::endl;
+}
+
+int	main()
+{
+	//This is OK, obviously, Warrior IS a warrior
+	Warrior*		a = new Warrior();
+
+	//This is also OK because Warrior IS a Character
+	Character*		b = new Warrior();
+
+	//This would NOT be ok because Character IS NOT a Warrior
+	//(Although they ARE related, and W IS-A C, the reverse is untrue)
+	//Warrior*		c = new Character();
+
+	//This would NOT be ok either because Cat is NOT a Character
+	//(They are not even related)
+	//Character*	d = new Cat();
+
+	a->sayHello("students");
+
+	b->sayHello("students");
+
+}
+
+OUTPUT:
+F*** off students, I don't like you!	 <-- from a
+Hello students !						 <-- from b
+
+
+Notes:
+Virtual can be used to make functions dynamic, not static, changing to this:
+class	Character
+{
+	public:
+		virtual void	sayHello(std::string const &target);
+};
+
+class	Warrior : public Character
+{
+	public:
+		virtual void	sayHello(std::string const &target);
+};
+
+Therefore the new output will be:
+
+OUTPUT:
+F*** off students, I don't like you!	 <-- from a
+F*** off students, I don't like you!	 <-- from b
+
+AKA virtual member function, or methods
+
+
+/******************************************************************************************************************/
+ABSTRACT CLASSES AND INTERFACES:
+- New Concept: Pure Method
+
+class	ACharacter
+{
+	private:
+		std::string		name;
+
+	public:
+		virtual void	attack(std::string const & target) = 0; <-- Pure function, will not allow us to instanciate the class
+																	becoming an abstract class, hence ACharacter. So when it
+																	inherits this class, it will no longer be able to attack
+		void			sayHello(std::string & target);
+};
+
+class	Warrior: public ACharacter
+{
+	public:
+		virtual void	attack(std::string const & target);
+}
+
+void	ACharacter::sayHello(std::string const & target)
+{
+	std::cout << "Hello " << target << " !" << std::endl	
+}
+
+void	Warrior::attack(std::string const &target)
+{
+	std::cout << "attacks " << target << " with a sword" << std::endl;
+}
+
+
+class	ICoffeeMaker	<-- prefixed I for interface
+{
+	public:
+		virtual void		fillWaterTank(IWaterSource * src) = 0;
+		virtual ICoffee*	makeCoffee(std::string const & type) = 0;
+}
+
+int	main()
+{
+	ACharacter*		a = new Warrior();
+
+	//This would NOT be ok because ACharacter is abstract
+	//ACharacter*	b = new ACharacter();
+
+	a->sayHello("students");
+	a->attack("roger");		<-- should not be able to attack
+									due to abstract behavior
+}
+
