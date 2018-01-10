@@ -37,7 +37,7 @@ class	FragTrap
 		void	beRepaired(unsigned int amount);
 
 		void	rename(std::string input);
-		void	displayStats();
+		void	displayStats(void);
 
 		void	vaulthunter_dot_exe(std:: string const &target);
 		void	meatUnicycle(std:: string const &target);

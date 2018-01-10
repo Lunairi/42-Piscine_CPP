@@ -25,8 +25,8 @@ class	Logger
 
 	public:
 
-		Logger();
-		~Logger();
+		Logger(void);
+		~Logger(void);
 
 		void			log(std::string const &dest, std::string const &message);
 
