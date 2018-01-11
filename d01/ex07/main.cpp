@@ -72,9 +72,16 @@ int 	main(int ac, char **av)
 			"./replace [FILENAME] [WORD TO FIND] [WORD TO REPLACE WITH]" << std::endl;
 		return (0);
 	}
+	std::string test = av[2];
+	std::string test2 = av[3];
 	if (av[2][0] == '\0' || av[3][0] == '\0')
 	{
 		std::cout << "Error: Invalid word inputs. Please enter valid words." << std::endl;
+		return (0);
+	}
+	else if (test.compare(test2) == 0)
+	{
+		std::cout << "You cannot put [WORD TO FIND] and [WORD TO REPLACE WITH] as the same word." << std::endl;
 		return (0);
 	}
 	parse_input(av[1], av[2], av[3]);
