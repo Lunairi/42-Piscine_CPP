@@ -13,7 +13,7 @@
 #include <iostream>
 #include "Fixed.hpp"
 
-int	main(int ac, char **av)
+int	main()
 {
 
 	Fixed a;
