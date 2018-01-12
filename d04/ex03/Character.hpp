@@ -34,7 +34,7 @@ class	Character : public ICharacter
 		Character &operator=(Character const &r);
 
 
-		std::string const & getName() const;
+		std::string const 	&getName() const;
 		void 				equip(AMateria* obj);
 		void 				unequip(int i);
 		void 				use(int i, ICharacter& target);
