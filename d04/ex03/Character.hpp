@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Ice.cpp                _             _              :::      ::::::::   */
+/*    Character.hpp          _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,45 +10,40 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
+#ifndef CHARACTER_H
+# define CHARACTER_H
+
 #include <iostream>
 #include <string>
 #include <ctime>
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "Ice.hpp"
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
-Ice::Ice(std::string const &type) : _type(type), _xp(0)
+class	Character : public ICharacter
 {
-	return;
-}
 
-Ice::Ice(Ice &obj)
-{
-	*this = obj;
-	return;
-}
+	public:
 
-Ice::~Ice(void)
-{
-	return;
-}
+		Character(void);
+		Character(std::string const &name);
+		Character(Character &obj);
+		~Character(void);
+		Character &operator=(Character const &r);
 
-Ice &Ice::operator=(Ice const &r) 
-{
-	this->_type = r._type;
-	return (*this);
-}
 
-Ice*	Ice::clone(void) const
-{
-	Ice 	*ice = new Ice("Ice");
+		std::string const & getName() const;
+		void 				equip(AMateria* obj);
+		void 				unequip(int i);
+		void 				use(int i, ICharacter& target);
 
-	return (ice);
-}
+	private:
 
-void		Ice::use(ICharacter &target)
-{
-	this->increaseXP();
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-}
+		AMateria		*_mat[4];
+		std::string	_name;
+
+};
+
+#endif

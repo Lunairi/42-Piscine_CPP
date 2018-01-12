@@ -19,8 +19,9 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include "AMateria.hpp"
 
-class	Cure
+class	Cure : public AMateria
 {
 
 	public:
@@ -28,7 +29,7 @@ class	Cure
 		Cure(void);
 		Cure(std::string const &type);
 		Cure(Cure &obj);
-		virtual ~Cure(void);
+		~Cure(void);
 		Cure &operator=(Cure const &r);
 
 		Cure*		clone(void) const = 0;

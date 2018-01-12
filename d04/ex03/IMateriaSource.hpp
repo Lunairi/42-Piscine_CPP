@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Ice.cpp                _             _              :::      ::::::::   */
+/*    IMateriaSource.hpp     _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,45 +10,25 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
+#ifndef IMATERIASOURCE_H
+# define IMATERIASOURCE_H
+
 #include <iostream>
 #include <string>
 #include <ctime>
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "Ice.hpp"
 
-Ice::Ice(std::string const &type) : _type(type), _xp(0)
+class	IMateriaSource
 {
-	return;
-}
 
-Ice::Ice(Ice &obj)
-{
-	*this = obj;
-	return;
-}
+	public:
 
-Ice::~Ice(void)
-{
-	return;
-}
+			virtual ~IMateriaSource() {}
+			virtual void learnMateria(AMateria*) = 0;
+			virtual AMateria* createMateria(std::string const & type) = 0;
 
-Ice &Ice::operator=(Ice const &r) 
-{
-	this->_type = r._type;
-	return (*this);
-}
+};
 
-Ice*	Ice::clone(void) const
-{
-	Ice 	*ice = new Ice("Ice");
-
-	return (ice);
-}
-
-void		Ice::use(ICharacter &target)
-{
-	this->increaseXP();
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-}
+#endif

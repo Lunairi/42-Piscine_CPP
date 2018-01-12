@@ -40,3 +40,15 @@ Cure &Cure::operator=(Cure const &r)
 	return (*this);
 }
 
+Cure*	Cure::clone(void) const
+{
+	Cure 	*cure = new Cure("Cure");
+
+	return (cure);
+}
+
+void		Cure::use(ICharacter &target)
+{
+	this->increaseXP();
+	std::cout << "* heals " << target.getName() << "'s wounds' *" << std::endl;
+}

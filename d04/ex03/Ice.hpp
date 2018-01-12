@@ -19,8 +19,9 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include "AMateria.hpp"
 
-class	Ice
+class	Ice : public AMateria
 {
 
 	public:
@@ -28,7 +29,7 @@ class	Ice
 		Ice(void);
 		Ice(std::string const &type);
 		Ice(Ice &obj);
-		virtual ~Ice(void);
+		~Ice(void);
 		Ice &operator=(Ice const &r);
 
 		Ice*		clone(void) const = 0;

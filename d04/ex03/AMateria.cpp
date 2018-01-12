@@ -53,4 +53,5 @@ unsigned int			getXP(void) const
 void					AMateria::increaseXP(void)
 {
 	this->_xp = this->_xp + 10;
+	return;
 }

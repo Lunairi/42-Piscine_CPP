@@ -19,6 +19,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include "AMateria.hpp"
 
 class	ICharacter
 {
