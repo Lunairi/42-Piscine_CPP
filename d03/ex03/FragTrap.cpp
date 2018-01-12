@@ -94,6 +94,7 @@ void	FragTrap::vaulthunter_dot_exe(std::string const &target)
 
 void	FragTrap::senselessSacrifice(std::string const &target)
 {
+	(void)target;
 	ClapTrap::setHp(0);
 	std::cout << "FR4G-TP " << this->name << " uses Senseless Sacrifice! It sacrificed itself for it's friends... But there's no friends around!" <<
 		std::endl << "Current Health: " << ClapTrap::getHp() << "/" << ClapTrap::getMhp() << std::endl
@@ -103,6 +104,7 @@ void	FragTrap::senselessSacrifice(std::string const &target)
 
 void	FragTrap::rubberDucky(std::string const &target)
 {
+	(void)target;
 	ClapTrap::setMhp(ClapTrap::getMhp() * 1.5);
 	std::cout << "FR4G-TP " << this->name << " uses Rubber Ducky! With his rubber ducky his max health has increased by 1.5x!" << std::endl <<
 		"New Max Health " << ClapTrap::getMhp() << std::endl
@@ -112,6 +114,7 @@ void	FragTrap::rubberDucky(std::string const &target)
 
 void	FragTrap::shhhhTrap(std::string const &target)
 {
+	(void)target;
 	ClapTrap::setArmor(ClapTrap::getArmor() * 5);
 	std::cout << "FR4G-TP " << this->name << " uses Shhhh... Trap! By creative five clones it's armor has increased by 5x!" << std::endl <<
 		"New Armor " << ClapTrap::getArmor() << std::endl

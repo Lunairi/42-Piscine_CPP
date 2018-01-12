@@ -18,14 +18,14 @@
 #include <fstream>
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void) : _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), name("CL4P-TP"), _patk(30), _ratk(20), _armor(5)
+ClapTrap::ClapTrap(void) : name("CL4P-TP"), _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), _patk(30), _ratk(20), _armor(5)
 {
 	srand(time(0));
 	std::cout << "CL4P-TP Default Constructor Called: [" << this->name << "] Welcome Vault Hunters!" << std::endl;
 	return;
 }
 
-ClapTrap::ClapTrap(std::string name) : _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), name(name), _patk(30), _ratk(20), _armor(5)
+ClapTrap::ClapTrap(std::string name) : name(name), _hp(100), _mhp(100), _sp(100), _msp(100), _lvl(1), _patk(30), _ratk(20), _armor(5)
 {
 	srand(time(0));
 	std::cout << "CL4P-TP Parameter Constructor Called: [" << this->name << "] Welcome Vault Hunters!" << std::endl;
@@ -116,7 +116,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 {
 	int i = 0;
 
-	if (amount > (this->_mhp + this->_armor))
+	if (amount > (unsigned int)(this->_mhp + this->_armor))
 		i = this->_mhp + this->_armor;
 	else
 		i = amount;
@@ -136,9 +136,9 @@ void	ClapTrap::beRepaired(unsigned int amount)
 {
 	int healed = 0;
 
-	if (amount > this->_mhp)
+	if (amount > (unsigned int)this->_mhp)
 		amount = this->_mhp;
-	if ((this->_hp + amount) > this->_mhp)
+	if ((this->_hp + amount) > (unsigned int)this->_mhp)
 	{
 		healed = ((this->_hp + amount) - this->_mhp) - amount;
 		if (healed < 0)

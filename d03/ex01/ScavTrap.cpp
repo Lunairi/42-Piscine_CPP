@@ -102,7 +102,7 @@ void	ScavTrap::takeDamage(unsigned int amount)
 {
 	int i = 0;
 
-	if (amount > (this->_mhp + this->_armor))
+	if (amount > (unsigned int)(this->_mhp + this->_armor))
 		i = this->_mhp + this->_armor;
 	else
 		i = amount;
@@ -122,11 +122,11 @@ void	ScavTrap::beRepaired(unsigned int amount)
 {
 	int healed = 0;
 
-	if (amount > this->_mhp)
-		amount = this->_mhp;
-	if ((this->_hp + amount) > this->_mhp)
+	if (amount > (unsigned int)this->_mhp)
+		amount = (unsigned int)this->_mhp;
+	if ((this->_hp + amount) > (unsigned int)this->_mhp)
 	{
-		healed = ((this->_hp + amount) - this->_mhp) - amount;
+		healed = ((this->_hp + amount) - (unsigned int)this->_mhp) - amount;
 		if (healed < 0)
 			healed = healed * -1;
 	}

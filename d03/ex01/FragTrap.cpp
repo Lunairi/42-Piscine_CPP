@@ -102,7 +102,7 @@ void	FragTrap::takeDamage(unsigned int amount)
 {
 	int i = 0;
 
-	if (amount > (this->_mhp + this->_armor))
+	if (amount > (unsigned int)(this->_mhp + this->_armor))
 		i = this->_mhp + this->_armor;
 	else
 		i = amount;
@@ -122,9 +122,9 @@ void	FragTrap::beRepaired(unsigned int amount)
 {
 	int healed = 0;
 
-	if (amount > this->_mhp)
-		amount = this->_mhp;
-	if ((this->_hp + amount) > this->_mhp)
+	if (amount > (unsigned int)this->_mhp)
+		amount = (unsigned int)this->_mhp;
+	if ((this->_hp + amount) > (unsigned int)this->_mhp)
 	{
 		healed = ((this->_hp + amount) - this->_mhp) - amount;
 		if (healed < 0)
@@ -179,6 +179,7 @@ void	FragTrap::vaulthunter_dot_exe(std::string const &target)
 
 void	FragTrap::senselessSacrifice(std::string const &target)
 {
+	(void)target;
 	this->_hp = 0;
 	std::cout << "FR4G-TP " << this->_name << " uses Senseless Sacrifice! It sacrificed itself for it's friends... But there's no friends around!" <<
 		std::endl << "Current Health: " << this->_hp << "/" << this->_mhp << std::endl
@@ -188,6 +189,7 @@ void	FragTrap::senselessSacrifice(std::string const &target)
 
 void	FragTrap::rubberDucky(std::string const &target)
 {
+	(void)target;
 	this->_mhp = this->_mhp * 1.5;
 	std::cout << "FR4G-TP " << this->_name << " uses Rubber Ducky! With his rubber ducky his max health has increased by 1.5x!" << std::endl <<
 		"New Max Health " << this->_mhp << std::endl
@@ -197,6 +199,7 @@ void	FragTrap::rubberDucky(std::string const &target)
 
 void	FragTrap::shhhhTrap(std::string const &target)
 {
+	(void)target;
 	this->_armor = this->_armor * 5;
 	std::cout << "FR4G-TP " << this->_name << " uses Shhhh... Trap! By creative five clones it's armor has increased by 5x!" << std::endl <<
 		"New Armor " << this->_armor << std::endl
