@@ -88,6 +88,7 @@ void		Bullet::setLife(int i) {
 }
 
 void		Bullet::setInfo(int x, int y, int life){
+	(void)life;
 	this->_x = x;
 	this->_y = y;
 	this->_life = 1;

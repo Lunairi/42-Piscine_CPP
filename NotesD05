@@ -1,0 +1,111 @@
+Notes for CPP Piscine Day 05 (We use C++ 98)
+
+/******************************************************************************************************************/
+NESTED CLASS:
+- Defining class inside another class
+- Used similar to namespace
+
+class Cat
+{
+	public:
+	class Leg
+	{
+		// [..]
+	};
+};
+
+class Dog
+{
+	public:
+	class Leg
+	{
+		// [..]
+	};
+};
+
+
+
+int	main()
+{
+	Cat			somecat;
+	Cat::Leg	somecatsleg;
+}
+
+/******************************************************************************************************************/
+EXCEPTIONS:
+- Reporting with a message
+
+#include <stdexcept>
+
+void	test1()
+{
+	try
+	{
+		// Do shit here
+		if (/* there an error */)
+		{
+			throw std::exception();
+		}
+		else
+		{
+			// Do more shit here
+		}
+	}
+	catch (std::exception e)
+	{
+		// Handle error here
+	}
+}
+
+void	test2()
+{
+	// Do shit here
+	if (/* there is an error */)
+	{
+		throw std::exception();
+	}	
+	else
+	{
+		// Do more shit here
+	}
+}
+
+void	test3()
+{
+	try
+	{
+		test2();
+	}
+	catch (std::exception &e)
+	{
+		// handle error
+	}
+}
+
+void	test4()
+{
+	class PEBKACException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Problem exist between keyboard and chair");
+			}
+	};
+
+	try
+	{
+		test3();
+	}
+	catch (PEBKACException &e)
+	{
+		// Handle the fact that the user is an idiot
+	}
+	catch (std::exception &e)
+	{
+		// Handle other exceptions that are like std::exception
+	}
+}
+
+
+

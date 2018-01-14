@@ -49,11 +49,11 @@ all: $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	@mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAG) $(HEADER) $< -o $@
+	@$(CC) $(CFLAG) $(WFLAG) $(HEADER) $< -o $@
 
 $(OBJDIR_CLASS)%.o: $(SRCDIR_CLASS)%.cpp
 	@mkdir -p $(OBJDIR_CLASS)
-	@$(CC) $(CFLAG) $(HEADER) $< -o $@
+	@$(CC) $(CFLAG) $(WFLAG) $(HEADER) $< -o $@
 
 $(NAME): $(OBJS) $(OBJS_CLASS)
 	@$(CC) $(OBJS) $(OBJS_CLASS) $(HEADER) $(LIBS) -o $@

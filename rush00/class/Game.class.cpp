@@ -12,7 +12,7 @@
 
 #include <Space.Invaders.hpp>
 
-Game::Game(int x, int y) : _mapx(x), _mapy(y), _endgame(2), _menu(1) {
+Game::Game(int x, int y) : _endgame(2), _mapx(x), _mapy(y), _menu(1) {
 	this->_eCount = 8;
 	this->_eBullet = 8;
 	this->_eElite = 0;
@@ -42,6 +42,7 @@ Game::Game(Game &obj) {
 Game::~Game(void) {
 	delete [] this->_bullet;
 	delete [] this->_ebullet;
+	delete [] this->_elitebullet;
 	delete [] this->_enemy;
 	if (this->_eElite > 0)
 		delete [] this->_elite;
@@ -188,8 +189,6 @@ void		Game::drawEnemy(void) {
 }
 
 void		Game::getInput(int c) {
-	int a = 0;
-
 	if (c == 27) {
 		setEndgame(0);
 	}
