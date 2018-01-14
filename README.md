@@ -12,3 +12,4 @@ Progress:
 - Day07 0/3
 - Day08 0/5
 - Rush00 1/1
+- Rush01 0/1
