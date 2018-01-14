@@ -83,15 +83,22 @@ void		Game::spawnEnemy(void) {
 
 	delete [] this->_ebullet;
 	delete [] this->_enemy;
-	delete [] this->_bullet;
 
 	this->_eCount = 10 + (this->_level * 2);
 	this->_eBullet = 10 + (this->_level * 2);
-	this->_ammoPouch = 16 + (this->_level * 1);
 
 	this->_ebullet = new Bullet[this->_eBullet];
 	this->_enemy = new Alien[this->_eCount];
+
+	delete [] this->_bullet;
+	this->_ammoPouch = 16 + this->_level;
 	this->_bullet = new Bullet[this->_ammoPouch];
+	for (int i = 0; i < this->_ammoPouch; i++) {
+		if (this->_bullet[i].checkLife()) {
+			this->_bullet[i].setLife(0);
+			this->_bullet[i].clearBullet();
+		}
+	}
 
 	this->_level++;
 	if (this->_bspd > 4)
@@ -194,11 +201,11 @@ void		Game::getInput(int c) {
 		mvaddch(_player.getY() + 1, _player.getX() + 1, ' ');
 		mvaddch(_player.getY() + 1, _player.getX() - 1, ' ');
 	}
-	if ((c == KEY_RIGHT || c == '6') && _player.getX() < _mapx)
+	if ((c == KEY_RIGHT || c == '6') && _player.getX() < _mapx - 1)
 		_player.moveRight();
-	if ((c == KEY_LEFT || c == '4' ) && _player.getX() > 1)
+	if ((c == KEY_LEFT || c == '4' ) && _player.getX() > 2)
 		_player.moveLeft();
-	if ((c == '3') && _player.getX() < _mapx)
+	if ((c == '3') && _player.getX() < _mapx - 1)
 	{
 		playerBullet();
 		_player.moveRight();
