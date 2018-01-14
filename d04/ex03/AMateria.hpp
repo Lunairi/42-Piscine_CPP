@@ -21,6 +21,8 @@
 #include <fstream>
 #include "ICharacter.hpp"
 
+class ICharacter;
+
 class	AMateria
 {
 
@@ -35,12 +37,15 @@ class	AMateria
 		std::string const		&getType(void) const; //Returns the materia type
 		unsigned int			getXP(void) const; //Returns the Materia s XP
 
+		void					setType(std::string name);
+		void					setXP(unsigned int xp);
+
 		void					increaseXP(void);
 
 		virtual AMateria*		clone(void) const = 0;
 		virtual void			use(ICharacter& target);
 
-	private:
+	protected:
 
 		std::string		_type;
 		unsigned int	_xp;

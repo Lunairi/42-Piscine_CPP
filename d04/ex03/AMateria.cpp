@@ -40,14 +40,33 @@ AMateria &AMateria::operator=(AMateria const &r)
 	return (*this);
 }
 
-std::string	const		&getType(void)	const
+std::string	const		&AMateria::getType(void) const
 {
 	return (this->_type);
 }
 
-unsigned int			getXP(void) const
+unsigned int			AMateria::getXP(void) const
 {
 	return (this->_xp);
+}
+
+void					AMateria::setType(std::string type)
+{
+	this->_type = type;
+	return;
+}
+
+void					AMateria::setXP(unsigned int xp)
+{
+	this->_xp = xp;
+	return;
+}
+
+void					AMateria::use(ICharacter& target)
+{
+	(void) target;
+	this->_xp = this->_xp + 10;
+	return;
 }
 
 void					AMateria::increaseXP(void)

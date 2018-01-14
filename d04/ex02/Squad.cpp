@@ -65,7 +65,6 @@ Squad::~Squad(void)
 
 Squad &Squad::operator=(Squad const &r) 
 {
-	int i = this->_unit;
 	this->_unit = r._unit;
 	
 	t_marinelist	*del;

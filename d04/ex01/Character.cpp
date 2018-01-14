@@ -18,7 +18,7 @@
 #include <fstream>
 #include "Character.hpp"
 
-Character::Character(std::string const &name) : _name(name), _ap(40), _weapon(NULL)
+Character::Character(std::string const &name) : _name(name), _weapon(NULL), _ap(40)
 {
 	return;
 }

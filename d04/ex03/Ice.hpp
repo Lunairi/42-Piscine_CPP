@@ -19,9 +19,9 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
-class	Ice : public AMateria
+class	Ice : virtual public AMateria
 {
 
 	public:
@@ -32,7 +32,7 @@ class	Ice : public AMateria
 		~Ice(void);
 		Ice &operator=(Ice const &r);
 
-		Ice*		clone(void) const = 0;
+		Ice*		clone(void) const;
 		void			use(ICharacter& target);
 
 };

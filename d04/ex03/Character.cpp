@@ -44,7 +44,7 @@ Character::~Character(void)
 	while (i < 4)
 	{
 		if (this->_mat[i] != NULL)
-			delete this->_mat[i]
+			delete this->_mat[i];
 		i++;
 	}
 	return;

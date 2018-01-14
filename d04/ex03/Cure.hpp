@@ -19,7 +19,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 class	Cure : public AMateria
 {
@@ -32,7 +32,7 @@ class	Cure : public AMateria
 		~Cure(void);
 		Cure &operator=(Cure const &r);
 
-		Cure*		clone(void) const = 0;
+		Cure*		clone(void) const;
 		void			use(ICharacter& target);
 
 };

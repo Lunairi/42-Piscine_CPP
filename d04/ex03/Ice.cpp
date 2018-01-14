@@ -18,7 +18,7 @@
 #include <fstream>
 #include "Ice.hpp"
 
-Ice::Ice(std::string const &type) : _type(type), _xp(0)
+Ice::Ice(std::string const &type) : AMateria(type)
 {
 	return;
 }
@@ -36,7 +36,9 @@ Ice::~Ice(void)
 
 Ice &Ice::operator=(Ice const &r) 
 {
-	this->_type = r._type;
+// 	setType(r.getType());
+// 	setXP(r.getXP());
+	(void)r;
 	return (*this);
 }
 
@@ -49,6 +51,6 @@ Ice*	Ice::clone(void) const
 
 void		Ice::use(ICharacter &target)
 {
-	this->increaseXP();
+	increaseXP();
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

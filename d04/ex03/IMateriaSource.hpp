@@ -20,6 +20,8 @@
 #include <sstream>
 #include <fstream>
 
+class AMateria;
+
 class	IMateriaSource
 {
 

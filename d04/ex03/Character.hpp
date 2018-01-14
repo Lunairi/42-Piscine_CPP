@@ -20,7 +20,6 @@
 #include <sstream>
 #include <fstream>
 #include "AMateria.hpp"
-#include "ICharacter.hpp"
 
 class	Character : public ICharacter
 {

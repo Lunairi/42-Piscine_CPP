@@ -18,7 +18,7 @@
 #include <fstream>
 #include "Cure.hpp"
 
-Cure::Cure(std::string const &type) : _type(type), _xp(0)
+Cure::Cure(std::string const &type) : AMateria(type)
 {
 	return;
 }
@@ -36,7 +36,9 @@ Cure::~Cure(void)
 
 Cure &Cure::operator=(Cure const &r) 
 {
-	this->_type = r._type;
+	// setType(r.getType());
+	// setXP(r.getXP());
+	(void)r;
 	return (*this);
 }
 
