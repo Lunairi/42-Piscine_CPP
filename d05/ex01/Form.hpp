@@ -19,6 +19,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include "Bureaucrat.hpp"
 
 class	Form
 {
@@ -26,16 +27,18 @@ class	Form
 	public:
 
 		Form(void);
-		Form(std::string const name, int grade);
+		Form(std::string const name, int sgrade, int egrade);
 		Form(Form &obj);
 		virtual ~Form(void);
 		Form &operator=(Form const &r);
 
-		void				operator+=(int const i);
-		void				operator-=(int const i);
-
 		std::string			getName(void) const;
-		int					getGrade(void) const;
+		bool				getSigned(void) const;
+		int					getSGrade(void) const;
+		int					getEGrade(void) const;
+
+		void				signForm(void);
+		void				beSigned(Bureaucrat &r);
 
 		class GradeTooHighException : public std::exception
 		{
@@ -62,8 +65,10 @@ class	Form
 
 	private:
 
-		std::string const	_name;
-		int					_grade;
+		std::string	const	_name;
+		bool				_signed;
+		int	const			_sgrade;
+		int	const			_egrade;
 
 
 }; 
