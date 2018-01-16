@@ -58,5 +58,7 @@ int	main()
 	deserial = deserialize(serial);
 	std::cout << deserial->s1 << std::endl << deserial->n << std::endl << deserial->s2 << std::endl;
 
+	delete deserial;
+
 	return (0);
 }
