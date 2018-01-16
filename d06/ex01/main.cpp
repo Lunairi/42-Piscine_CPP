@@ -51,7 +51,7 @@ int	main()
 
 	srand(time(0));
 	serial = serialize();
-	std::cout << "Address of the random serialzed data" << std::endl << serial << std::endl << std::endl;
+	std::cout << "Address of the random serialized data" << std::endl << serial << std::endl << std::endl;
 	deserial = deserialize(serial);
 	std::cout << "Results of deserializing the serialized data using the address" << std::endl <<
 		"Random Array 1: " << deserial->s1 << std::endl << 
