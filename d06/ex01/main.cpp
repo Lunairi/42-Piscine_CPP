@@ -19,7 +19,7 @@
 
 void 	*serialize(void)
 {
-	Serial	*data = new Serial;;
+	Data	*data = new Data;;
 	int 	i = 0;
 
 	char	output[] =
