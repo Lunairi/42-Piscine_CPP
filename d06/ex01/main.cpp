@@ -19,20 +19,25 @@
 
 void 	*serialize(void)
 {
-	Data	*data = new Data;
-	int 	i = 0;
+	int 	i = -1;
+	char	*data = new char[18];
 
 	char	output[] =
 	{
-		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+		"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	};
 	
-	while (i++ < 8)
-		data->s1 = data->s1 + output[rand() % 62];
-	data->n = rand();
-	i = 0;
-	while (i++ < 8)
-		data->s2 = data->s2 + output[rand() % 62];
+	std::cout << "Serialized of Concatenated Arrays/Int Being Made: ";
+	while (++i < 8)
+		data[i] = output[rand() % 62];
+	i = 7;
+	while (++i < 10)
+		data[i] = output[rand() % 10];
+	i = 9;
+	while (++i < 18)
+		data[i] = output[rand() % 62];
+	data[i] = '\0';
+	std::cout << data << std::endl;
 	return (reinterpret_cast<void*>(data));
 }
 
@@ -40,7 +45,18 @@ Data 	*deserialize(void	*raw)
 {
 	Data 		*data = new Data;
 
-	data = reinterpret_cast<Data*>(raw);
+	data->n = 0;
+	char		*input = reinterpret_cast<char*>(raw);
+	int i = -1;
+
+	while (++i < 8)
+		data->s1 = data->s1 + input[i];
+	i = 7;
+	while (++i < 10)
+		data->n = data->n * 10 + input[i] - '0';
+	i = 9;
+	while (++i < 18)
+		data->s2 = data->s2 + input[i];
 	return (data);
 }
 
