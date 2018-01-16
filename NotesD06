@@ -1,0 +1,256 @@
+Notes for CPP Piscine Day 06 (We use C++ 98)
+
+/******************************************************************************************************************/
+C-TYPE CONVERSION:
+- C support two cast
+- Implicit cast means compiler will do it for you
+- Can make explicit conversion with C cast
+
+void	dump_32bits_integer(int const n);
+void	dump_64bits_double(double const z);
+
+int	main(void) 
+{
+	int a = 42; 			// reference value
+
+	double b = a; 			// implicit conversion cast
+	double c = (double)a; 	// explicit conversion cast
+
+	double d = a;			// implicit promotion -> ok
+	int e = d; 				// implicit demotion -> hazardous !
+	inf f = (int)d; 		// explicit demotion -> ok, you're in charge
+
+	dump_32bits_integer(a);
+
+	dump_64bits_double(b);
+	dump_64bits_double(c);
+
+	dump_64bits_double(d);
+	dump_32bits_integer(e);
+	dump_32bits_integer(f);
+
+	return 0;
+}
+
+/******************************************************************************************************************/
+C-TYPE REINTERPRETATION:
+
+int	main(void)
+{
+	float a = 420.042f;		// reference value
+
+	void* b = &a;			// implicit reinterpretation cast
+	void* c = (void*)&a;	// explicit reinterpretation cast
+
+	void* d = &a;			// implicit promotion -> ok
+	int* e = d;				// implicit demotion -> hazardous !
+	int* f = (int*)d;		// explicit demotion -> ok, I obey
+
+	printf("%p, %f\n", &a, a);
+
+	printf("%p\n", b);
+	printf("%p\n", c);
+
+	printf("%p\n", d);
+	printf("%p, %d\n", e, *e);
+	printf("%p, %d\n", f, *f);
+}
+
+/******************************************************************************************************************/
+C-TYPE QUALIFIER REINTERPRETATION:
+- Keyword are const and volatile
+
+int main()
+{
+	int a = 42;						// reference value
+
+	int const* b = &a;				// implicit type qualifier cast
+	int const* = (int const*)&a;	// explicit type qualifier cast
+
+	int const* d = &a;				// implicit promotion -> ok
+	int* e = d;						// implicit demotion -> hell no !
+	int* f = (int*)d;				// explicit demotion -> ok, I obey
+
+	return 0;
+}
+
+/******************************************************************************************************************/
+UPCAST AND DOWNCAST:
+
+class Parent				{};
+class Child1: public parent	{};
+class Child2: public parent {};
+
+int main()
+{
+	Child1 	a;						// reference value
+
+	Parent	*b = &a;				// implicit upcast cast
+	Parent	*c = (Parent *) &a;		// implicit upcast cast
+
+	Parent	*d = &a;				// implicit upcast -> ok
+	Child1	*e = d;					// implicit downcast -> hell no !
+	Child2	*f = (Child2 *) d;		// explicit downcast -> ok, but really ? will have issue
+}
+
+/******************************************************************************************************************/
+STATIC CAST:
+- 5 possible cast action (all the ones above)
+- Use C++ cast called static_cast for simple values
+
+int	main()
+{
+	int		a	= 42;					// reference value
+
+	double	b 	= a;					// implicit promotion -> ok
+	int		c	= b;					// implicit demotion -> hell no !
+	ind		d	= static_cast<int>(b);	// implicit demotion -> ok, I obey
+}
+
+
+ANOTHER EXAMPLE
+
+class Parent				{};
+class Child1: public parent	{};
+class Child2: public parent {};
+
+class Unrelated				{};
+
+int main()
+{
+	Child1 	a;								// reference value
+
+	Parent	*b = &a;						// implicit upcast -> ok
+	Child	*c = b;							// implicit downcast -> hell no !
+	Child2	*d = static_cast<Child2 *>(b);	// Explicit downcast -> ok I obey
+	
+	Unrelated *a = static_cast<Unrelated *>(&a) // Explicit conversion -> no !
+
+	return 0;
+}
+
+
+/******************************************************************************************************************/
+DYNAMIC CAST:
+- Is very different from different cast
+- Happens during runtime, not compilation
+- Only work with polymorphic instances (virtual)
+
+class Parent				{ public: virtual ~Parent(void) {} };
+class Child1: public parent	{};
+class Child2: public parent {};
+
+
+int	main()
+{
+	Child1		a;						// reference value
+	Parent		*b = &a;						// implicit upcast -> ok
+
+	// explicit downcast -> suspens...
+	Child1		*c = dyamic_cast<Child1 *>(b);
+	if (c == NULL) {
+		std::cout << "Conversion is NOT OK" << std::endl;
+	}
+	else {
+		std::cout << "Conversion is OK" << std::endl;
+	}
+
+	// explicit downcast -> suspens...
+	try {
+		Child2	&d = dynamic_cast<Child 2&>(*b);
+		std::cout << "Conversion is OK" << std::endl;
+	}
+	catch (std::bad_cast &bc) {
+		std::cut << "Conversion is NOT OK: " << bc.what() << std::endl;
+		return 0;
+	}
+
+	return 0;
+}
+
+/******************************************************************************************************************/
+REINTERPRET CAST:
+
+int	main()
+{
+	float a = 420.042f;						// reference value
+
+	void *b = &a;							// implicit promotion -> ok
+	int *c = reinterpret_cast<int *>(b);	// explicit demotion -> ok i obey
+	int &d = reinterpret_cast<int &>(b);	// explicit demotion -> ok i obey
+
+	return 0;
+}
+
+/******************************************************************************************************************/
+CONST CAST:
+- Last C++ cast
+- Not a good thing to use
+
+int	main()
+{
+	int a = 42;									// reference value
+
+	int const *b = &a;							// implicit promotion -> ok
+	int *c = b;									// implicit demotion -> hell no !
+	int *d = const<int *>(b);					// explicit demotion -> ok i obey
+
+	return 0;
+}
+
+/******************************************************************************************************************/
+CAST OPERATOR:
+
+class Foo 
+{
+	public:
+
+		Foo (float const v) : _v(v) {}
+
+		float getV(void)	{ return ->_v; }
+ 
+		operator float()	{ return ->_v; }.   <-- cast operator followed by type
+		operator int()		{ return static_cast<int>(this->_v); }
+
+	private:
+
+		float _v;
+}
+
+int	main()
+{
+	
+	Foo	a(420.024f);
+	float b = a; <-- cast operator, will take care of it
+	int c = a; <-- implicit cast
+
+	std::cout << a.getV() << std::endl;
+	std::cout << b << std::endl;
+	std::cout << c << std::endl;
+}
+
+/******************************************************************************************************************/
+EXPLICIT KEYWORD:
+- Dynamic cast, const cast, static const, reinterpret cast
+
+class A {};
+class B {};
+
+class C {
+	
+	public:
+
+					C(A const &_)	{return;} <-- two contructor, one to A, one to B
+		explicit	C(B const &_)	{return;} <-- makes conversion only explicit
+};
+
+void	f(C const &_) {
+	return ;
+}
+
+int	main(void) {
+	
+	f( A() ); // implicit conversion OK
+	f( B() ); // implicit conversion NOT OK, constructor is explicit
+}
+
