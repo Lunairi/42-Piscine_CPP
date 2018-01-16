@@ -65,5 +65,7 @@ int	main()
 	std::cout << "Identifying class from reference: ";
 	identify_from_reference(*test);
 
+	delete test;
+
 	return (0);
 }
