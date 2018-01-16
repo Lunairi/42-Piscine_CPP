@@ -56,9 +56,13 @@ int	main()
 {
 	srand(time(0));
 
+	std::cout << "Instanciating randomly A, B or C" << std::endl;
 	Base	*test = generate();
 
+	std::cout << "Identifying class from pointer: ";
 	identify_from_pointer(test);
+
+	std::cout << "Identifying class from reference: ";
 	identify_from_reference(*test);
 
 	return (0);
