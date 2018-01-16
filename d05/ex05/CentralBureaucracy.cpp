@@ -37,15 +37,46 @@ CentralBureaucracy::CentralBureaucracy(void)
 	return;
 }
 
-// CentralBureaucracy::CentralBureaucracy(CentralBureaucracy &src)
-// {
-// 	*this = src;
-// 	return;
-// }
+CentralBureaucracy::CentralBureaucracy(CentralBureaucracy &src)
+{
+	*this = src;
+	return;
+}
 
 CentralBureaucracy::~CentralBureaucracy(void)
 {
 	return;
+}
+
+CentralBureaucracy &CentralBureaucracy::operator=(CentralBureaucracy &r) 
+{
+	int i = 0;
+	Bureaucrat *copy = new Bureaucrat;
+
+	while (r._target[i] != "")
+	{
+		this->_target[i] = r._target[i];
+		i++;
+	}
+
+	i = 0;
+	while (r._ob[i].getSigner() == 1)
+	{
+		*copy = r._ob[i].retSigner();
+		_ob[i].setSigner(*copy);
+		i++;
+	}
+
+	i = 0;
+	while (r._ob[i].getExecuter() == 1)
+	{
+		*copy = r._ob[i].retExecuter();
+		_ob[i].setExecutor(*copy);
+		i++;
+	}
+
+	delete copy;
+	return (*this);
 }
 
 void	CentralBureaucracy::doBureaucracy(void)

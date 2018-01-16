@@ -18,6 +18,11 @@
 #include <fstream>
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat(void) : _name("Arta"), _grade(1)
+{
+	return;
+}
+
 Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name)
 {
 	if (grade < 1)

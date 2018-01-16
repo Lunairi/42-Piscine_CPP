@@ -30,9 +30,9 @@ class	CentralBureaucracy
 	public:
 
 		CentralBureaucracy(void);
-		// CentralBureaucracy(CentralBureaucracy &obj);
+		CentralBureaucracy(CentralBureaucracy &obj);
 		virtual ~CentralBureaucracy(void);
-		// CentralBureaucracy &operator=(CentralBureaucracy const &r);
+		CentralBureaucracy &operator=(CentralBureaucracy &r);
 
 		void	feedSigner(Bureaucrat &obj);
 		void	feedExecuter(Bureaucrat &obj);
@@ -43,7 +43,6 @@ class	CentralBureaucracy
 
 	private:
 
-		// CentralBureaucracy &operator=(CentralBureaucracy const &r);
 		OfficeBlock		_ob[20];
 		std::string		_target[100];
 }; 

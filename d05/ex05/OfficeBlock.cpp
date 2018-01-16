@@ -33,9 +33,6 @@ OfficeBlock::OfficeBlock(Intern &intern, Bureaucrat &signer, Bureaucrat &execute
 
 OfficeBlock::~OfficeBlock(void)
 {
-	// delete _intern;
-	// delete _signer;
-	// delete _executer;
 	return;
 }
 
@@ -78,6 +75,16 @@ void			OfficeBlock::doBureaucracy(std::string form, std::string target)
 
 	delete creation;
 	return;
+}
+
+Bureaucrat		OfficeBlock::retSigner(void)
+{
+	return (*_signer);
+}
+
+Bureaucrat		OfficeBlock::retExecuter(void)
+{
+	return (*_executer);
 }
 
 int				OfficeBlock::getAll(void)

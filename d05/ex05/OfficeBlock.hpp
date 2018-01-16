@@ -40,6 +40,9 @@ class	OfficeBlock
 		int		getSigner(void);
 		int		getExecuter(void);
 
+		Bureaucrat	retSigner(void);
+		Bureaucrat	retExecuter(void);
+
 		int		getAll(void);
 
 		void	doBureaucracy(std::string form, std::string target);
