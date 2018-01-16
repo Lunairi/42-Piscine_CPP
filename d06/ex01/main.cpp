@@ -38,13 +38,9 @@ void 	*serialize(void)
 
 Data 	*deserialize(void	*raw)
 {
-	Serial		*serial;
 	Data 		*data = new Data;
 
-	serial = reinterpret_cast<Serial*>(raw);
-	data->s1 = static_cast<std::string>(serial->s1);
-	data->n = static_cast<int>(serial->n);
-	data->s2 = static_cast<std::string>(serial->s2);
+	data = reinterpret_cast<Data*>(raw);
 	return (data);
 }
 
