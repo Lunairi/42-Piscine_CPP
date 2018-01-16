@@ -7,7 +7,7 @@ Progress:
 - Day02 3/4
 - Day03 5/5
 - Day04 3/5
-- Day05 0/6
+- Day05 6/6
 - Day06 0/3
 - Day07 0/3
 - Day08 0/5

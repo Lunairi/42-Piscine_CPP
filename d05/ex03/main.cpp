@@ -57,9 +57,14 @@ int	main()
 	ftest3->beSigned(test);
 	test2.executeForm(*ftest3);
 
+	Form *ftest4;
+	std::cout << std::endl << "** Creating Non Existent form with target Whatever with Intern, should fail **" << std::endl;
+	ftest4 = intern.makeForm("Non Existent", "Whatever");
+
 	delete ftest;
 	delete ftest2;
 	delete ftest3;
+	delete ftest4;
 
 	return (0);
 }
