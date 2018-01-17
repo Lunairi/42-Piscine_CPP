@@ -1,0 +1,66 @@
+Notes for CPP Piscine Day 08 (We use C++ 98)
+
+/******************************************************************************************************************/
+STL:
+- Standard Template Library
+- Contains two important things:
+- 1) Containers, can container anything
+- 2) Algorithm that lets you do operations on a collection
+
+#include <vector>
+#include <map>
+#include <list>
+#include <iostream>
+
+class IOperation;
+
+int main()
+{
+	std::list<int>							lst1;
+	lst1.push_back(1);
+	lst1.push_back(17);
+	lst1.push_back(42);
+
+	std::list<int>::const_iterator			it;  				<-- const_iterator acts like a pointer
+	std::list<int>::const_iterator			ite = lst1.end();	<-- there are simple iterator too, there are
+																	iterators for maps too, check cplusplus.com
+
+	for (it = lst.begin(); it !+ ite; ++it)
+		std::cout << *it << std::endl;							<-- outputting what it is pointing to in list
+
+	std::map<std::string, IOperation*>)		map1;				<-- C++ version of hash table
+	map1["opA"] = new OperationA;
+	map1["opB"] = new OperationB;
+
+	std::vector<int>						v1;					<-- array can contain exactly what we need
+	std::vector<int>						v2(42, 100);
+
+	return (0);
+}
+
+
+NEW FILE
+
+#include <iostream>
+#include <algorithm>				<-- has foreach, which means perform an operation on each option
+#include <list>
+
+void	displayInt(int i)
+{
+	std::cout << i << std::endl
+}
+
+int	main()
+{
+	std::list<int>	lst;
+
+	lst.push_back(10);
+	lst.push_back(23);
+	lst.push_back(3);
+	lst.push_back(17);
+	lst.push_back(20);
+
+	for_each(lst.begin(), lst.end(), displayInt);
+
+	return (0);
+}
