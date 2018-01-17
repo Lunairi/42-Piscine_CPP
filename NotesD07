@@ -1,0 +1,117 @@
+Notes for CPP Piscine Day 07 (We use C++ 98)
+
+/******************************************************************************************************************/
+C-PARAMETRIC MACROS:
+- Too much repetitiveness
+
+int		max_int	(int x, int y)	{ return ( x >= y ? x :y ); }
+flaot	max_float (float x, int y) { return ( x >= y ? x :y ); }
+char	max_char (char x, char y ) { return ( x >= y ? x :y ); }
+
+#define max(x, y) (((x)>=(y)) ? (x) : (y) )
+
+/******************************************************************************************************************/
+TEMPLATES:
+- Can write expressive programs but cause you to go program (due to error messages, pages of errors)
+- Special syntax of CPP that lets us write templates (make compiler code for us)
+- Global T type, must all be the same (homogeneous)
+
+template <typename T>	  	 					<-- must be declared first
+T const		&max(T const &x, T const &y)		<-- T can be any type as long as they are all the same
+{
+	return (x>=y ? x : y);
+}
+
+can do implicit or explicit instanciation
+
+int a = 21;
+int b = 42;
+
+max<int>(a, b) or max(a, b)
+explicit		  implicit
+
+
+
+ANOTHER EXAMPLE
+
+template <typename T>
+class List
+{
+	public:
+
+		List<T>(T Const & content) {}
+		List<T>(List<T> const & list) {}
+		~List<T>(void) {}
+
+	private:
+		T		*_content;
+		List<t>	*_next;
+};
+
+int	main(){
+	list<int> a(42);
+	list<float> b(3.14f);
+	list<list<int>> c(a);
+	return (0);
+}
+
+
+temple can contain more than 1 typename:
+template<typename T, typename U>
+list<int, float>
+
+
+/******************************************************************************************************************/
+DEFAULT TYPE & SPECIALIZATION:
+
+FILE: Vertex.tpp
+
+template <typename T = float> 		<-- define template if type is not given
+
+class Vertex
+{
+	public:
+
+		Vertex(T const &x, T Const &y, T const &z) : _x(x), _y(x), _z(z) {}
+		~Vertex(void) {}
+
+		T const &getX(void) const { return this->_x; }
+		T const &getY(void) const { return this->_y; }
+		T const &getZ(void) const { return this->_z; }
+
+	private:
+
+		T const	_x;
+		T const	_y;
+		T const	_z;
+
+		Vextex(void);
+};
+
+template <typename T>
+std::ostream	&operator<<(std::ostream &o, Vertex<T> const &v)
+{
+	std::cout.precision(1);
+	o << setiosflags(std::ios::fixed);
+	o << "Vertex( ";
+	o << v.getX() << ", ";
+	o << v.getY() << ", ";
+	o << v.getZ();
+	o << " )";
+	return (o);
+}
+
+int	main()
+{
+	Vertex<int>		v1(12, 23, 34);
+	Vertex<>		v2(12, 23, 34);		<-- default type is float since its not specified
+
+	std::cout << v1 << std::endl;
+	std::cout << v2 << std::endl;
+
+	return (0):
+}
+
+
+
+
