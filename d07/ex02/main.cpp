@@ -24,7 +24,8 @@ int				main(void)
 	Array<int> test(n);
 
 	std::cout << "Size of Array made: " << test.size() << std::endl << std::endl <<
-		"Now filling array with random stuff and printing it" << std::endl;
+		"Now filling array with random stuff and printing it" << std::endl
+		<< "(will print one past extra for error exception)" << std::endl << std::endl;;
 
 	try
 	{
