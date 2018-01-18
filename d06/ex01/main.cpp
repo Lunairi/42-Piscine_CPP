@@ -20,24 +20,33 @@
 void 	*serialize(void)
 {
 	int 	i = -1;
-	char	*data = new char[18];
+	char	*data = new char[20];
 
 	char	output[] =
 	{
 		"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	};
 	
-	std::cout << "Serialized of Concatenated Arrays/Int Being Made: ";
+	std::cout << "Serialized of Concatenated Arrays/Int Being Made: " << std::endl;
 	while (++i < 8)
 		data[i] = output[rand() % 62];
 	i = 7;
-	while (++i < 10)
-		data[i] = output[rand() % 10];
-	i = 9;
-	while (++i < 18)
+	while (++i < 12)
+		data[i] = rand() % 256 - 128;
+	i = 11;
+	while (++i < 20)
 		data[i] = output[rand() % 62];
 	data[i] = '\0';
-	std::cout << data << std::endl;
+	i = -1;
+	std::cout << "Random Array 1: ";
+	while (++i < 8)
+		std::cout << data[i];
+	std::cout << std::endl << "Random Integer: " << static_cast<int>(data[8]);
+	i = 11;
+	std::cout << std::endl << "Random Array 2: ";
+	while (++i < 20)
+		std::cout << data[i];
+	std::cout << std::endl;
 	return (reinterpret_cast<void*>(data));
 }
 
@@ -51,11 +60,9 @@ Data 	*deserialize(void	*raw)
 
 	while (++i < 8)
 		data->s1 = data->s1 + input[i];
-	i = 7;
-	while (++i < 10)
-		data->n = data->n * 10 + input[i] - '0';
-	i = 9;
-	while (++i < 18)
+	data->n = input[8];
+	i = 11;
+	while (++i < 20)
 		data->s2 = data->s2 + input[i];
 	return (data);
 }
@@ -71,7 +78,7 @@ int	main()
 	deserial = deserialize(serial);
 	std::cout << "Results of deserializing the serialized data using the address" << std::endl <<
 		"Random Array 1: " << deserial->s1 << std::endl << 
-		"Random Integers: " << deserial->n << std::endl << 
+		"Random Integer: " << deserial->n << std::endl << 
 		"Random Array 2: " << deserial->s2 << std::endl;
 
 	delete deserial;
