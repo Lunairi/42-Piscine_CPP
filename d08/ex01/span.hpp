@@ -47,6 +47,17 @@ class	Span
 				virtual const char* what() const throw();
 		};
 
+		class NotEnoughValuesException : public std::exception
+		{
+			public:
+				
+				NotEnoughValuesException(void);
+				NotEnoughValuesException(NotEnoughValuesException const &obj);
+				virtual ~NotEnoughValuesException(void) throw();
+				NotEnoughValuesException &operator=(NotEnoughValuesException const &r);
+				virtual const char* what() const throw();
+		};
+
 		void			addNumber(int num);
 		int				shortestSpan(void);
 		int				longestSpan(void);

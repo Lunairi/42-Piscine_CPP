@@ -56,14 +56,35 @@ void		Span::addNumber(int num)
 
 int			Span::shortestSpan(void)
 {
-	std::vector<int>	min = _store;
-	return(*std::min_element(min.begin(), min.end()));
+	std::vector<int>		copy = _store;
+	std::sort(copy.begin(), copy.end());
+	if (_size <= 1)
+		throw Span::NotEnoughValuesException();
+	std::vector<int>::iterator it  = copy.begin();
+	std::vector<int>::iterator one = copy.begin();
+	std::vector<int>::iterator two = copy.end();
+	it++;
+	two--;
+	unsigned int i = 0;
+	
+	while (i < (_size - 1))
+	{
+		if (abs(*one - *it) < abs(*one - *two))
+			two = it;
+		else if (abs(*two - *it) < abs(*one - *two))
+			one = it;
+		i++;
+		it++;
+	}
+	return (abs(*one - *two));
 }
 
 int			Span::longestSpan(void)
 {
+	if (_size <= 1)
+		throw Span::NotEnoughValuesException();
 	std::vector<int>	max = _store;
-	return(*std::max_element(max.begin(), max.end()));
+	return(*std::max_element(max.begin(), max.end()) - *std::min_element(max.begin(), max.end()));
 }
 
 
@@ -96,4 +117,37 @@ Span::StorageLimitException &Span::StorageLimitException::operator=(StorageLimit
 const char* Span::StorageLimitException::what() const throw()
 {
 	return ("Error: Storage capacity is maxed.");
+}
+
+
+
+/*
+** NotEnoughValuesException Nested Class
+*/
+
+Span::NotEnoughValuesException::NotEnoughValuesException(void)
+{
+	return;
+}
+
+Span::NotEnoughValuesException::NotEnoughValuesException(NotEnoughValuesException const &obj)
+{
+	*this = obj;
+	return;
+}
+
+Span::NotEnoughValuesException::~NotEnoughValuesException(void) throw()
+{
+	return;
+}
+
+Span::NotEnoughValuesException &Span::NotEnoughValuesException::operator=(NotEnoughValuesException const &r) 
+{
+	(void)r;
+	return (*this);
+}
+
+const char* Span::NotEnoughValuesException::what() const throw()
+{
+	return ("Error: Not enough values in storage to determine span");
 }
