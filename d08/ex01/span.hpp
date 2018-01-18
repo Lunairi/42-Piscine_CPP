@@ -54,6 +54,7 @@ class	Span
 	private:
 
 		std::vector<int>	_store;
+		unsigned int		_size;
 
 }; 
 

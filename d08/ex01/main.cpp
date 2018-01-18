@@ -52,7 +52,21 @@ int	main(int ac, char **av)
 	std::cout << std::endl << std::endl << "Total Iterations: " << x;
 
 	std::cout << std::endl << std::endl << "Smallest value in storage: " << test.shortestSpan() << std::endl <<
-		"Largest value in storage: " << test.longestSpan() << std::endl;
+		"Largest value in storage: " << test.longestSpan() << std::endl << std::endl <<
+		"Now adding one more to show error handling" << std::endl;
+
+	try
+	{
+		test.addNumber(rand() % 10000);
+	}
+	catch (Span::StorageLimitException &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << "WTF?" << std::endl;
+	}
 
 	return (0);
 }

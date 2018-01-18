@@ -23,7 +23,7 @@
 #include <algorithm>
 #include "span.hpp"
 
-Span::Span(unsigned int n)
+Span::Span(unsigned int n) : _size(n)
 {
 	_store.reserve(n);
 	return;
@@ -48,7 +48,7 @@ Span &Span::operator=(Span const &r)
 
 void		Span::addNumber(int num)
 {
-	if (_store.size() < _store.max_size())
+	if (_store.size() < _size)
 		_store.push_back(num);
 	else
 		throw Span::StorageLimitException();
@@ -95,5 +95,5 @@ Span::StorageLimitException &Span::StorageLimitException::operator=(StorageLimit
 
 const char* Span::StorageLimitException::what() const throw()
 {
-	return ("Storage capacity is maxed.");
+	return ("Error: Storage capacity is maxed.");
 }
