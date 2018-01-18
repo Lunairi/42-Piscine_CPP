@@ -42,11 +42,16 @@ int				main(int ac, char **av)
 	list.push_back(rand() % 10);
 
 	int search = atoi(av[1]);
+	if (search < 0 || search > 9)
+	{
+		std::cout << "Please enter one value between 0 and 9 to be searched in the list." << std::endl;
+		return (0);
+	}
 
 	try
 	{
 		int ret = easyfind(list, search);
-		std::cout << "Found value [" << search << "] at index: [" << ret << "]" << std::endl;
+		std::cout << "Found value [" << search << "] at index [" << ret << "]" << std::endl;
 	}
 	catch (std::exception& e)
 	{
