@@ -57,7 +57,7 @@ Conversion::operator char(void) const
 	{
 		throw (ConversionErrorException());
 	}
-	return (ret);
+	return (static_cast<char>(ret));
 	
 }
 

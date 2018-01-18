@@ -16,7 +16,7 @@ NAME	= convert
 
 SRC		= main.cpp Conversion.cpp
 
-CFLAG	= -Wall -Wextra -Werror
+CFLAG	= -Wconversion -Wall -Wextra -Werror
 
 .SILENT:
 
