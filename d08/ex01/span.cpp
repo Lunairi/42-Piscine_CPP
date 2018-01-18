@@ -56,10 +56,10 @@ void		Span::addNumber(int num)
 
 int			Span::shortestSpan(void)
 {
-	std::vector<int>		copy = _store;
-	std::sort(copy.begin(), copy.end());
 	if (_size <= 1)
 		throw Span::NotEnoughValuesException();
+	std::vector<int>		copy = _store;
+	std::sort(copy.begin(), copy.end());
 	std::vector<int>::iterator it  = copy.begin();
 	std::vector<int>::iterator one = copy.begin();
 	std::vector<int>::iterator two = copy.end();
