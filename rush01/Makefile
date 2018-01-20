@@ -17,7 +17,10 @@
 
 SRC = main.cpp
 
-SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp
+SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp DateTimeModule.cpp \
+			CPUInfoModule.cpp ProcessInfoModule.cpp CPUUsageModule.cpp \
+			RAMUsageModule.cpp NetworkInfoModule.cpp \
+			TerminalDisplay.cpp
 
 OBJ = $(SRC:.cpp=.o)
 OBJ_CLASS = $(SRC_CLASS:.cpp=.o)

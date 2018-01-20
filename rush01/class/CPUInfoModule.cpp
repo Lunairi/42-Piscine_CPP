@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    CPUInfoModule.cpp      _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,46 +10,35 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
+
 #include <Gkrellm.hpp>
 
-int		main() {
+CPUInfoModule::CPUInfoModule(std::string const name) : IMonitorModule(), _output(), _name(name)
+{
+	char buf[128];
+	size_t buflen = 128;
+	sysctlbyname("machdep.cpu.brand_string", &buf, &buflen, NULL, 0);
+	this->_output.push_back(buf);
 
-	std::vector<IMonitorModule*> modules;
-
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
-
-	TerminalDisplay		textDisplay(modules);
-
-	textDisplay.renderOutput();
-
-	sleep(5);
-
-	return (0);
+	return ;
 }
 
+CPUInfoModule::~CPUInfoModule()
+{
+	return ;
+}
 
+std::vector<std::string> const		&CPUInfoModule::getOutput(void) const
+{
+	return (this->_output);
+}
 
+std::string const					&CPUInfoModule::getName(void) const
+{
+	return (this->_name);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void								CPUInfoModule::tick(void)
+{
+	return ;
+}

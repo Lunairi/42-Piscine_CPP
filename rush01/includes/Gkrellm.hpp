@@ -43,5 +43,13 @@
 # include <IMonitorModule.hpp>
 # include <HostNameModule.hpp>
 # include <OSInfoModule.hpp>
+# include <DateTimeModule.hpp>
+# include <CPUInfoModule.hpp>
+# include <ProcessInfoModule.hpp>
+# include <CPUUsageModule.hpp>
+# include <RAMUsageModule.hpp>
+# include <NetworkInfoModule.hpp>
+# include <IMonitorDisplay.hpp>
+# include <TerminalDisplay.hpp>
 
 #endif

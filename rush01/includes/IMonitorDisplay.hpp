@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    IMonitorDisplay.hpp     _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,46 +10,25 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#include <Gkrellm.hpp>
+#ifndef IMONITORDISPLAY_HPP
+# define IMONITORDISPLAY_HPP
 
-int		main() {
+# include <Gkrellm.hpp>
 
-	std::vector<IMonitorModule*> modules;
+class IMonitorDisplay
+{
+	public:
 
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
+		IMonitorDisplay(void) {}
+		virtual ~IMonitorDisplay(void) {}
 
-	TerminalDisplay		textDisplay(modules);
+		virtual void		refreshOutput(void) = 0;
+		virtual void		renderOutput(void) = 0;
+		
+	private:
 
-	textDisplay.renderOutput();
+		IMonitorDisplay(IMonitorDisplay const &obj);
+		IMonitorDisplay	&operator=(IMonitorDisplay const &r);
+};
 
-	sleep(5);
-
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

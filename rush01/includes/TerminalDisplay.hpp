@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    TerminalDisplay.hpp    _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,46 +10,38 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#include <Gkrellm.hpp>
 
-int		main() {
+#ifndef TERMINALDISPLAY_HPP
+# define TERMINALDISPLAY_HPP
 
-	std::vector<IMonitorModule*> modules;
+# include <Gkrellm.hpp>
 
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
+class TerminalDisplay : public IMonitorDisplay
+{
+	public:
 
-	TerminalDisplay		textDisplay(modules);
+		TerminalDisplay(std::vector<IMonitorModule*> const modules);
+		virtual ~TerminalDisplay(void);
+		
+		void		renderOutput(void);
+		void		refreshOutput(void);
+		void		fillSpace(char *str);
+		
+	private:
 
-	textDisplay.renderOutput();
+		TerminalDisplay(void);
+		TerminalDisplay(TerminalDisplay const &obj);
+		TerminalDisplay	&operator=(TerminalDisplay const &r);
 
-	sleep(5);
+		std::vector<IMonitorModule*>	_modules;
 
-	return (0);
-}
+		int		_x;
+		int		_y;
+		int		_length;
+		int		_text;
+		int		_col;
+		int		_row;
+	
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

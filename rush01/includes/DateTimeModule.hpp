@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    DateTimeModule.hpp     _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,46 +10,32 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#include <Gkrellm.hpp>
 
-int		main() {
+#ifndef DATETIMEMODULE_HPP
+# define DATETIMEMODULE_HPP
 
-	std::vector<IMonitorModule*> modules;
+# include <Gkrellm.hpp>
 
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
+class DateTimeModule : public IMonitorModule
+{
+	public:
 
-	TerminalDisplay		textDisplay(modules);
+		DateTimeModule(std::string const name);
+		virtual ~DateTimeModule(void);
+		
+		void							tick(void);
+		std::vector<std::string> const	&getOutput(void) const;
+		std::string const				&getName(void) const;
+		
+	private:
 
-	textDisplay.renderOutput();
+		DateTimeModule(void);
+		DateTimeModule(DateTimeModule const &obj);
+		DateTimeModule	&operator=(DateTimeModule const &r);
 
-	sleep(5);
+		std::vector<std::string>		_output;
+		std::string						_name;
+	
+};
 
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

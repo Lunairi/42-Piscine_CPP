@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    ProcessInfoModule.hpp  _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,46 +10,32 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#include <Gkrellm.hpp>
 
-int		main() {
+#ifndef PROCESSINFOMODULE_HPP
+# define PROCESSINFOMODULE_HPP
 
-	std::vector<IMonitorModule*> modules;
+# include <Gkrellm.hpp>
 
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
+class ProcessInfoModule : public IMonitorModule
+{
+	public:
 
-	TerminalDisplay		textDisplay(modules);
+		ProcessInfoModule(std::string const name);
+		virtual ~ProcessInfoModule(void);
+		
+		void							tick(void);
+		std::vector<std::string> const	&getOutput(void) const;
+		std::string const				&getName(void) const;
+		
+	private:
 
-	textDisplay.renderOutput();
+		ProcessInfoModule(void);
+		ProcessInfoModule(ProcessInfoModule const &obj);
+		ProcessInfoModule	&operator=(ProcessInfoModule const &r);
 
-	sleep(5);
+		std::vector<std::string>		_output;
+		std::string						_name;
+	
+};
 
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif
