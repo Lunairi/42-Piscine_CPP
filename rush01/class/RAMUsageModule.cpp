@@ -61,5 +61,26 @@ std::string const					&RAMUsageModule::getName(void) const
 
 void								RAMUsageModule::tick(void)
 {
+	std::ifstream				rifs("./others/raminfo");
+	std::string					rline = "";
+	std::vector<std::string>	ram;
+
+	while (getline(rifs, rline, ' '))
+		ram.push_back(rline);
+
+	rifs.close();
+
+	std::stringstream 			convert;
+
+	convert << "Used: " << (stoi(ram.at(9)) -  stoi(ram.at(11).substr(1, ram.at(11).length()))) << "MB";
+	this->_output.at(1) = convert.str();
+	convert.str("");
+
+	convert << "Wired :" << stoi(ram.at(11).substr(1, ram.at(11).length())) << "MB";
+	this->_output.at(2) = convert.str();
+	convert.str("");
+
+	convert << "Unused: " << stoi(ram.at(13)) << "MB";
+	this->_output.at(3) = convert.str();
 	return ;
 }

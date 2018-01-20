@@ -21,6 +21,8 @@ TerminalDisplay::TerminalDisplay(std::vector<IMonitorModule*> const modules) : I
 	cbreak();
 	noecho();
 	curs_set(0);
+	keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
 
 	getmaxyx(stdscr, this->_row, this->_col);
 

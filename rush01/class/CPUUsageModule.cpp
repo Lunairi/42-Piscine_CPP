@@ -58,5 +58,27 @@ std::string const					&CPUUsageModule::getName(void) const
 
 void								CPUUsageModule::tick(void)
 {
+	std::system( "top -l 1 | grep -E \"^CPU|^Phys\" > ./others/raminfo" );
+	std::ifstream				rifs("./others/raminfo");
+	std::string					rline = "";
+	std::vector<std::string>	cpu;
+
+	while (getline(rifs, rline, ' '))
+		cpu.push_back(rline);
+
+	rifs.close();
+
+	std::stringstream 			convert;
+
+	convert << "User: " << cpu.at(2) << "%";
+	this->_output.at(0) = convert.str();
+	convert.str("");
+
+	convert << "System: " << cpu.at(4) << "%";
+	this->_output.at(1) = convert.str();
+	convert.str("");
+
+	convert << "Idle: " << cpu.at(6) << "%";
+	this->_output.at(2) = convert.str();
 	return ;
 }

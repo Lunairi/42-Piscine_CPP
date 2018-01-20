@@ -14,7 +14,8 @@
 
 int		main() {
 
-	std::vector<IMonitorModule*> modules;
+	std::vector<IMonitorModule*> 	modules;
+	int								c = 0;
 
 	modules.push_back(new HostNameModule(" HOST NAME "));
 	modules.push_back(new OSInfoModule(" OS INFO "));
@@ -28,9 +29,23 @@ int		main() {
 
 	textDisplay.renderOutput();
 	while (1)
-		textDisplay.refreshOutput();
-
-	sleep(5);
+	{
+		try
+		{
+			if ((c = getch()) != ERR)
+			{
+				endwin();
+				exit(1);
+			}
+			textDisplay.refreshOutput();
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+			endwin();
+			exit(1);
+		}
+	}
 
 	return (0);
 }
