@@ -31,7 +31,6 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <sys/sysctl.h>
-#include <pcap.h>
 
 
 int		main() {
@@ -196,16 +195,29 @@ int		main() {
 		** Network throughput
 		*/
 		std::system( "nettop -J bytes_in,bytes_out -x -l1 > ./others/netinfo" );
-		system("killall nettop");
 		std::ifstream				nifs("./others/netinfo");
 		std::string					nline = "";
-		std::vector<std::string>	net;
+		std::vector<std::string>			net;
 
-		while (getline(nifs, nline))
+		long	packet_in = 0;
+		long	packet_out = 0;
+		int		i = 0;
+
+		while (getline(nifs, nline, ' '))
 		{
-			net.push_back(nline);
-			std::cout << nline << std::endl;
+			if (nline != "" && (nline.find_first_not_of("0123456789") == std::string::npos))
+			{
+				if (i % 2 == 0)
+					packet_in = packet_in + stol(nline);
+				else
+					packet_out = packet_out + stol(nline);
+				i++;
+			}
 		}
+
+		std::cout << std::endl << "NETWORK THROUGHPUT" << std::endl <<
+			"Packets In: " << packet_in << std::endl << 
+			"Packets Out: " << packet_out << std::endl;
 
 		rifs.close();
 	}
