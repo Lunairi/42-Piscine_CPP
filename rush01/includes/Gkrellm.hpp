@@ -42,6 +42,5 @@
 
 # include <IMonitorModule.hpp>
 # include <HostNameModule.hpp>
-# include <UserNameModule.hpp>
 
 #endif

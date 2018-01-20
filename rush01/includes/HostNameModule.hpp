@@ -23,9 +23,9 @@ class HostNameModule : public IMonitorModule
 		HostNameModule(std::string const name);
 		virtual ~HostNameModule(void);
 		
-		void				tick(void);
-		std::string const	&getOutput(void) const;
-		std::string const	&getName(void) const;
+		void							tick(void);
+		std::vector<std::string> const	&getOutput(void) const;
+		std::string const				&getName(void) const;
 		
 	private:
 
@@ -33,8 +33,8 @@ class HostNameModule : public IMonitorModule
 		HostNameModule(HostNameModule const &obj);
 		HostNameModule	&operator=(HostNameModule const &r);
 
-		std::string			_output;
-		std::string			_name;
+		std::vector<std::string>		_output;
+		std::string						_name;
 	
 };
 

@@ -12,10 +12,12 @@
 
 # Original creator Mikim (from rush00), using the makefile he made together for
 # rush00 since it's so much nicer and convenient compared to my normal makefile
+# Mikim gave me permission to keep his header structure and use for this rush
+# Visit his awesome github here https://github.com/mikim42
 
 SRC = main.cpp
 
-SRC_CLASS = HostNameModule.cpp UserNameModule.cpp
+SRC_CLASS = HostNameModule.cpp
 
 OBJ = $(SRC:.cpp=.o)
 OBJ_CLASS = $(SRC_CLASS:.cpp=.o)

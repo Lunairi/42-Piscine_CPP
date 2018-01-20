@@ -25,11 +25,9 @@ int		main() {
 		/*
 		** Hostname/Username 
 		*/
-		HostNameModule host("HOSTNAME");
-		UserNameModule user("USERNAME");
+		HostNameModule host("Hostname ");
 
-		std::cout << host.getName() << std::endl << host.getOutput() << std::endl << std::endl;
-		std::cout << user.getName() << std::endl << user.getOutput() << std::endl << std::endl;
+		std::cout << host.getName() << host.getOutput().at(1) << std::endl << host.getOutput().at(0) << std::endl << std::endl;
 
 
 		/*

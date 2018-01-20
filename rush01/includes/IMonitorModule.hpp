@@ -22,9 +22,9 @@ class IMonitorModule
 		IMonitorModule(void) {}
 		virtual ~IMonitorModule(void) {}
 
-		virtual void				tick(void) = 0;
-		virtual std::string const	&getOutput(void) const = 0;
-		virtual std::string const	&getName(void) const = 0;
+		virtual void							tick(void) = 0;
+		virtual std::vector<std::string> const	&getOutput(void) const = 0;
+		virtual std::string const				&getName(void) const = 0;
 		
 	private:
 

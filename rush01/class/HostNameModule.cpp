@@ -16,9 +16,12 @@
 HostNameModule::HostNameModule(std::string const name) : IMonitorModule(), _output(), _name(name)
 {
 	char hostname[255]; // 255 is max len on linux
+	char username[255];
 	gethostname(hostname, 255);
+	getlogin_r(username, 255);
 
-	this->_output = hostname;
+	this->_output.push_back(hostname);
+	this->_output.push_back(username);
 	return ;
 }
 
@@ -27,17 +30,17 @@ HostNameModule::~HostNameModule()
 	return ;
 }
 
-std::string const		&HostNameModule::getOutput(void) const
+std::vector<std::string> const		&HostNameModule::getOutput(void) const
 {
 	return (this->_output);
 }
 
-std::string const		&HostNameModule::getName(void) const
+std::string const					&HostNameModule::getName(void) const
 {
 	return (this->_name);
 }
 
-void					HostNameModule::tick(void)
+void								HostNameModule::tick(void)
 {
 	return ;
 }
