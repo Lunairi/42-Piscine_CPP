@@ -46,136 +46,34 @@ void					TerminalDisplay::fillSpace(char *str)
 
 void					TerminalDisplay::renderOutput(void)
 {
-
-	// HOSTNAME
 	fillSpace((char*)"-"); fillSpace((char*)"-");
 
 	this->_text = (this->_col / 2) - 6;
 	mvprintw((this->_x - 1), this->_text, " FT_GKRELLM ");
-	fillSpace((char*)"-");
+	fillSpace((char*)"-"); fillSpace((char*)"=");
 
-	this->_length = this->_modules.at(0)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(0)->getOutput().at(1).c_str());
+	size_t i = 0;
+	size_t x = 0;
 
-	fillSpace((char*)"-"); fillSpace((char*)"="); fillSpace((char*)"-");
-
-	this->_length = this->_modules.at(0)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(0)->getName().c_str());
-
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length = this->_modules.at(0)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(0)->getOutput().at(0).c_str());
-	fillSpace((char*)"="); fillSpace((char*)"-");
-
-	// OS INFO
-	this->_length = this->_modules.at(1)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(1)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length = this->_modules.at(1)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(1)->getOutput().at(0).c_str());
-	fillSpace((char*)"-");
-
-	this->_length = this->_modules.at(1)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length / 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(1)->getOutput().at(1).c_str());
-	fillSpace((char*)"=");
-
-	// Date & Time
-	this->_length= this->_modules.at(2)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(2)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(2)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(2)->getOutput().at(0).c_str());
-	fillSpace((char*)"-"); 
-
-	this->_length= this->_modules.at(2)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(2)->getOutput().at(1).c_str());
-	fillSpace((char*)"="); fillSpace((char*)"-");
-
-	// CPU Info
-	this->_length= this->_modules.at(3)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(3)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(3)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(3)->getOutput().at(0).c_str());
-	fillSpace((char*)"="); fillSpace((char*)"-");
-	
-	// CPU Usage
-	this->_length= this->_modules.at(4)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(4)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(4)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(4)->getOutput().at(0).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(4)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(4)->getOutput().at(1).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(4)->getOutput().at(2).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(4)->getOutput().at(2).c_str());
-	fillSpace((char*)"="); fillSpace((char*)"-");
-
-	// Ram Usage
-	this->_length= this->_modules.at(5)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(5)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(5)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(5)->getOutput().at(0).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(5)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(5)->getOutput().at(1).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(5)->getOutput().at(2).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(5)->getOutput().at(2).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(5)->getOutput().at(3).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(5)->getOutput().at(3).c_str());
-	fillSpace((char*)"="); fillSpace((char*)"-");
-
-	// Network Info
-	this->_length= this->_modules.at(6)->getName().length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(6)->getName().c_str());
-	fillSpace((char*)"-"); fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(6)->getOutput().at(0).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(6)->getOutput().at(0).c_str());
-	fillSpace((char*)"-");
-
-	this->_length= this->_modules.at(6)->getOutput().at(1).length();
-	this->_text = (this->_col / 2) - (this->_length/ 2);
-	mvprintw((this->_x - 1), this->_text, this->_modules.at(6)->getOutput().at(1).c_str());
-	fillSpace((char*)"=");
+	while (i < (this->_modules.size()))
+	{
+		fillSpace((char*)"-");
+		this->_length = this->_modules.at(i)->getName().length();
+		this->_text = (this->_col / 2) - (this->_length / 2);
+		mvprintw((this->_x - 1), this->_text, this->_modules.at(i)->getName().c_str());
+		fillSpace((char*)"-");
+		while (x < (this->_modules.at(i)->getOutput().size()))
+		{
+			fillSpace((char*)"-");
+			this->_length = this->_modules.at(i)->getOutput().at(x).length();
+			this->_text = (this->_col / 2) - (this->_length / 2);
+			mvprintw((this->_x - 1), this->_text, this->_modules.at(i)->getOutput().at(x).c_str());
+			x++;
+		}
+		fillSpace((char*)"=");
+		x = 0;
+		i++;
+	}
 
 	box(stdscr, 42, 61);
 	refresh();
@@ -183,8 +81,17 @@ void					TerminalDisplay::renderOutput(void)
 	return ;
 }
 
-
 void					TerminalDisplay::refreshOutput(void)
 {
+	size_t i = 0;
+
+	this->_x = 1;
+	this->_y = -1;
+	while (i < (this->_modules.size()))
+	{
+		this->_modules.at(i)->tick();
+		i++;
+	}
+	renderOutput();
 	return ;
 }

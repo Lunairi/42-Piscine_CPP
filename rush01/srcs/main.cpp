@@ -27,6 +27,8 @@ int		main() {
 	TerminalDisplay		textDisplay(modules);
 
 	textDisplay.renderOutput();
+	while (1)
+		textDisplay.refreshOutput();
 
 	sleep(5);
 
