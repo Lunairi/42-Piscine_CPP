@@ -15,7 +15,7 @@
 # Mikim gave me permission to keep his header structure and use for this rush
 # Visit his awesome github here https://github.com/mikim42
 
-SRC = main.cpp
+SRC = main.cpp TextDisplay.cpp
 
 SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp DateTimeModule.cpp \
 			CPUInfoModule.cpp ProcessInfoModule.cpp CPUUsageModule.cpp \

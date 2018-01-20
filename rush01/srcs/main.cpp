@@ -12,41 +12,19 @@
 
 #include <Gkrellm.hpp>
 
-int		main() {
-
-	std::vector<IMonitorModule*> 	modules;
-	int								c = 0;
-
-	modules.push_back(new HostNameModule(" HOST NAME "));
-	modules.push_back(new OSInfoModule(" OS INFO "));
-	modules.push_back(new DateTimeModule(" DATE & TIME "));
-	modules.push_back(new CPUInfoModule(" CPU INFO "));
-	modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
-
-	TerminalDisplay		textDisplay(modules);
-
-	textDisplay.renderOutput();
-	while (1)
+int		main(int ac, char **av)
+{
+	if (ac != 2 || (strcmp(av[1], "-t") && strcmp(av[1], "-g")))
 	{
-		try
-		{
-			if ((c = getch()) != ERR)
-			{
-				endwin();
-				exit(1);
-			}
-			textDisplay.refreshOutput();
-		}
-		catch (const std::exception &e)
-		{
-			std::cout << e.what() << std::endl;
-			endwin();
-			exit(1);
-		}
+		std::cout << "You must enter a mode for ft_gkrellm" << std::endl <<
+			"USAGE: ft_gkrellm [OPTION]" << std::endl <<
+			"-g			enables graphic mode" << std::endl <<
+			"-t			enables text mode" << std::endl;
+		return (0);
 	}
-
+	
+	if (!strcmp(av[1], "-t"))
+		text_display();
 	return (0);
 }
 

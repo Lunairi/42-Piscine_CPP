@@ -52,4 +52,6 @@
 # include <IMonitorDisplay.hpp>
 # include <TerminalDisplay.hpp>
 
+void	text_display();
+
 #endif
