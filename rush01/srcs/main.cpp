@@ -40,45 +40,65 @@ int		main() {
 
 	getmaxyx(stdscr, row, col);
 
+	/*
+	** Hostname & Title of Project
+	*/
 	HostNameModule host(" HOSTNAME ");
 
 	fill_space(&x, &y, (char*)"=", col);
-	fill_space(&x, &y, (char*)":", col);
-	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"-", col);
+	fill_space(&x, &y, (char*)"-", col);
 
 	text = (col / 2) - 6;
 	mvprintw((x - 1), text, " FT_GKRELLM ");
-	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"-", col);
 
 	length = host.getOutput().at(1).length();
 	text = (col / 2) - (length / 2);
 	mvprintw((x - 1), text, host.getOutput().at(1).c_str());
 
-	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"-", col);
 	fill_space(&x, &y, (char*)"=", col);
-	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"-", col);
 
 	length = host.getName().length();
 	text = (col / 2) - (length / 2);
 	mvprintw((x - 1), text, host.getName().c_str());
 
-	fill_space(&x, &y, (char*)":", col);
-	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"-", col);
+	fill_space(&x, &y, (char*)"-", col);
 
 	length = host.getOutput().at(0).length();
 	text = (col / 2) - (length / 2);
 	mvprintw((x - 1), text, host.getOutput().at(0).c_str());
+	fill_space(&x, &y, (char*)"=", col);
+	fill_space(&x, &y, (char*)"-", col);
+
+	/*
+	** OS Info
+	*/
+	OSInfoModule oinfo(" OS INFO ");
+
+	length = host.getName().length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, oinfo.getName().c_str());
+	fill_space(&x, &y, (char*)"-", col);
+	fill_space(&x, &y, (char*)"-", col);
+
+	length = oinfo.getOutput().at(0).length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, oinfo.getOutput().at(0).c_str());
+	fill_space(&x, &y, (char*)"-", col);
+
+	length = oinfo.getOutput().at(1).length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, oinfo.getOutput().at(1).c_str());
+	fill_space(&x, &y, (char*)"=", col);
+
 
 	box(stdscr, 0, 0);
 	refresh();
 
-	// /*
-	// ** OS Info
-	// */
-	// struct utsname	uts;
-	// uname(&uts);
-	// std::cout << std::endl <<  "OS TYPE" << std::endl << uts.sysname << std::endl <<
-	// 	std::endl << "OS RELEASE" << std::endl << uts.release <<  std::endl;
 
 	// /*
 	// ** Date/time
@@ -101,11 +121,11 @@ int		main() {
 	// 	stamp->tm_mday << ", " << 
 	// 	(1900 + stamp->tm_year) << std::endl << std::endl;
 	// std::cout << "TIME" << std::endl;
-	// std::cout << stamp->tm_hour << ":";
+	// std::cout << stamp->tm_hour << "-";
 	// if (stamp->tm_min > 9)
-	// 	std::cout << stamp->tm_min << ":";
+	// 	std::cout << stamp->tm_min << "-";
 	// else
-	// 	std::cout << "0" << stamp->tm_min << ":";
+	// 	std::cout << "0" << stamp->tm_min << "-";
 	// if (stamp->tm_sec > 9)
 	// 	std::cout << stamp->tm_sec << std::endl << std::endl;	
 	// else

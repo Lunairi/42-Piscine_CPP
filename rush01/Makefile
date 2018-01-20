@@ -17,7 +17,7 @@
 
 SRC = main.cpp
 
-SRC_CLASS = HostNameModule.cpp
+SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp
 
 OBJ = $(SRC:.cpp=.o)
 OBJ_CLASS = $(SRC_CLASS:.cpp=.o)

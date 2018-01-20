@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Gkrellm.hpp            _             _              :::      ::::::::   */
+/*    OSInfoModule.hpp       _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,38 +10,32 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef GKRELLM
-# define GKRELLM
 
-/*
-** Literally including EVERYTHING that I might end up using
-*/
-# include <ncurses.h>
-# include <curses.h>
-# include <iostream>
-# include <fstream>
-# include <string>
-# include <iomanip>
-# include <sstream>
-# include <vector>
-# include <map>
-# include <list>
-# include <algorithm>
-# include <ncurses.h>
-# include <curses.h>
-# include <thread>
-# include <unistd.h>
-# include <limits.h>
-# include <ctime>
-# include <sys/utsname.h>
-# include <numeric>
-# include <stdio.h>
-# include <stdint.h>
-# include <sys/types.h>
-# include <sys/sysctl.h>
+#ifndef OSINFOMODULE_HPP
+# define OSINFOMODULE_HPP
 
-# include <IMonitorModule.hpp>
-# include <HostNameModule.hpp>
-# include <OSInfoModule.hpp>
+# include <Gkrellm.hpp>
+
+class OSInfoModule : public IMonitorModule
+{
+	public:
+
+		OSInfoModule(std::string const name);
+		virtual ~OSInfoModule(void);
+		
+		void							tick(void);
+		std::vector<std::string> const	&getOutput(void) const;
+		std::string const				&getName(void) const;
+		
+	private:
+
+		OSInfoModule(void);
+		OSInfoModule(OSInfoModule const &obj);
+		OSInfoModule	&operator=(OSInfoModule const &r);
+
+		std::vector<std::string>		_output;
+		std::string						_name;
+	
+};
 
 #endif

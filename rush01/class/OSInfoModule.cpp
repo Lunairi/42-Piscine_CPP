@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    Gkrellm.hpp            _             _              :::      ::::::::   */
+/*    OSInfoModule.cpp       _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -10,38 +10,35 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-#ifndef GKRELLM
-# define GKRELLM
 
-/*
-** Literally including EVERYTHING that I might end up using
-*/
-# include <ncurses.h>
-# include <curses.h>
-# include <iostream>
-# include <fstream>
-# include <string>
-# include <iomanip>
-# include <sstream>
-# include <vector>
-# include <map>
-# include <list>
-# include <algorithm>
-# include <ncurses.h>
-# include <curses.h>
-# include <thread>
-# include <unistd.h>
-# include <limits.h>
-# include <ctime>
-# include <sys/utsname.h>
-# include <numeric>
-# include <stdio.h>
-# include <stdint.h>
-# include <sys/types.h>
-# include <sys/sysctl.h>
+#include <Gkrellm.hpp>
 
-# include <IMonitorModule.hpp>
-# include <HostNameModule.hpp>
-# include <OSInfoModule.hpp>
+OSInfoModule::OSInfoModule(std::string const name) : IMonitorModule(), _output(), _name(name)
+{
+	struct utsname	uts;
+	uname(&uts);
 
-#endif
+	this->_output.push_back(uts.sysname);
+	this->_output.push_back(uts.release);
+	return ;
+}
+
+OSInfoModule::~OSInfoModule()
+{
+	return ;
+}
+
+std::vector<std::string> const		&OSInfoModule::getOutput(void) const
+{
+	return (this->_output);
+}
+
+std::string const					&OSInfoModule::getName(void) const
+{
+	return (this->_name);
+}
+
+void								OSInfoModule::tick(void)
+{
+	return ;
+}
