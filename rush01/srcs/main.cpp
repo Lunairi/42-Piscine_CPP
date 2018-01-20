@@ -12,190 +12,233 @@
 
 #include <Gkrellm.hpp>
 
+void	fill_space(int *x, int *y, char *str, int col)
+{
+	while (*y < col)
+	{
+		mvprintw(*x, *y, str);
+		*y = *y + 1;
+	}
+	*x = *x + 1;
+	*y = -1;
+}
 
 int		main() {
 	// srand(time(NULL));
 
-	// initscr();//creates std screen
-	// cbreak();//enter raw modal
-	// noecho();
-	// curs_set(0);
-	// while (1)
-	{
-		/*
-		** Hostname/Username 
-		*/
-		HostNameModule host("Hostname ");
+	initscr();//creates std screen
+	cbreak();//enter raw modal
+	noecho();
+	curs_set(0);
 
-		std::cout << host.getName() << host.getOutput().at(1) << std::endl << host.getOutput().at(0) << std::endl << std::endl;
+	int		col = 0;
+	int		row = 0;
+	int		x = 1;
+	int		y = -1;
+	int		length = 0;
+	int		text = 0;
 
+	getmaxyx(stdscr, row, col);
 
-		/*
-		** OS Info
-		*/
-		struct utsname	uts;
-		uname(&uts);
-		std::cout << std::endl <<  "OS TYPE" << std::endl << uts.sysname << std::endl <<
-			std::endl << "OS RELEASE" << std::endl << uts.release <<  std::endl;
+	HostNameModule host(" HOSTNAME ");
 
-		/*
-		** Date/time
-		*/
-		std::string	month[] = 
-		{
-			"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-			"Sep", "Oct", "Nov", "Dec"
-		};
+	fill_space(&x, &y, (char*)"=", col);
+	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)":", col);
 
-		std::string	week[] =
-		{
-			"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-		};
-		time_t  timev = time(&timev);
-		struct tm *stamp = localtime(&timev);
-		std::cout << std::endl << "DATE" << std::endl <<
-			week[stamp->tm_wday] << " " <<
-			month[stamp->tm_mon] << " " << 
-			stamp->tm_mday << ", " << 
-			(1900 + stamp->tm_year) << std::endl << std::endl;
-		std::cout << "TIME" << std::endl;
-		std::cout << stamp->tm_hour << ":";
-		if (stamp->tm_min > 9)
-			std::cout << stamp->tm_min << ":";
-		else
-			std::cout << "0" << stamp->tm_min << ":";
-		if (stamp->tm_sec > 9)
-			std::cout << stamp->tm_sec << std::endl << std::endl;	
-		else
-			std::cout << "0" << stamp->tm_sec << std::endl << std::endl;
-			//Note to self: This needs to be automated, the time system
+	text = (col / 2) - 6;
+	mvprintw((x - 1), text, " FT_GKRELLM ");
+	fill_space(&x, &y, (char*)":", col);
 
-		/*
-		** CPU
-		*/
-		char buffer[128];
-		size_t bufferlen = 128;
-		sysctlbyname("machdep.cpu.brand_string",&buffer,&bufferlen,NULL,0);
-		std::cout << "CPU INFO" << std::endl << buffer << std::endl << std::endl;
+	length = host.getOutput().at(1).length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, host.getOutput().at(1).c_str());
 
-		std::system( "/usr/bin/top -n 1 | /usr/bin/head -n5 > ./others/sysinfo" );
-		std::ifstream				ifs("./others/sysinfo");
-		std::string					line = "";
-		std::vector<std::string> 	info;
+	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)"=", col);
+	fill_space(&x, &y, (char*)":", col);
 
-		while (getline(ifs, line, ' '))
-			info.push_back(line);
+	length = host.getName().length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, host.getName().c_str());
 
-		ifs.close();
+	fill_space(&x, &y, (char*)":", col);
+	fill_space(&x, &y, (char*)":", col);
 
-		std::string process_total = info.at(1);
-		std::string process_running = info.at(3);
-		std::string process_stuck = info.at(5);
-		std::string process_sleeping = info.at(7);
-		std::string process_threads = info.at(9);
+	length = host.getOutput().at(0).length();
+	text = (col / 2) - (length / 2);
+	mvprintw((x - 1), text, host.getOutput().at(0).c_str());
 
-		std::string load_avg1;
-		std::string load_avg2;
-		std::string load_avg3;
+	box(stdscr, 0, 0);
+	refresh();
 
-		int stuck = 0;
+	// /*
+	// ** OS Info
+	// */
+	// struct utsname	uts;
+	// uname(&uts);
+	// std::cout << std::endl <<  "OS TYPE" << std::endl << uts.sysname << std::endl <<
+	// 	std::endl << "OS RELEASE" << std::endl << uts.release <<  std::endl;
 
-		if (info.at(6) == "stuck,")
-			stuck = 1;
+	// /*
+	// ** Date/time
+	// */
+	// std::string	month[] = 
+	// {
+	// 	"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+	// 	"Sep", "Oct", "Nov", "Dec"
+	// };
 
-		if (stuck == 1)
-		{
-			load_avg1 = info.at(14);
-			load_avg2 = info.at(15);
-			load_avg3 = info.at(16);
-		}
-		else
-		{
-			load_avg1 = info.at(12);
-			load_avg2 = info.at(13);
-			load_avg3 = info.at(14);
-		}
+	// std::string	week[] =
+	// {
+	// 	"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+	// };
+	// time_t  timev = time(&timev);
+	// struct tm *stamp = localtime(&timev);
+	// std::cout << std::endl << "DATE" << std::endl <<
+	// 	week[stamp->tm_wday] << " " <<
+	// 	month[stamp->tm_mon] << " " << 
+	// 	stamp->tm_mday << ", " << 
+	// 	(1900 + stamp->tm_year) << std::endl << std::endl;
+	// std::cout << "TIME" << std::endl;
+	// std::cout << stamp->tm_hour << ":";
+	// if (stamp->tm_min > 9)
+	// 	std::cout << stamp->tm_min << ":";
+	// else
+	// 	std::cout << "0" << stamp->tm_min << ":";
+	// if (stamp->tm_sec > 9)
+	// 	std::cout << stamp->tm_sec << std::endl << std::endl;	
+	// else
+	// 	std::cout << "0" << stamp->tm_sec << std::endl << std::endl;
+	// 	//Note to self: This needs to be automated, the time system
 
-		std::cout << "PROCESSES" << std::endl <<
-			"Total: " << process_total << std::endl <<
-			"Running: " << process_running << std::endl;
-		if (stuck == 1)
-		{
-			std::cout << "Stuck: " << process_stuck << std::endl << 
-			"Sleeping: " << process_sleeping << std::endl <<
-			"Threads: " << process_threads << std::endl << std::endl;
-		}
-		else
-		{
-			std::cout << "Sleeping: " << process_stuck << std::endl << 
-			"Threads: " << process_sleeping << std::endl << std::endl;
-		}
+	// /*
+	// ** CPU
+	// */
+	// char buffer[128];
+	// size_t bufferlen = 128;
+	// sysctlbyname("machdep.cpu.brand_string",&buffer,&bufferlen,NULL,0);
+	// std::cout << "CPU INFO" << std::endl << buffer << std::endl << std::endl;
 
-		std::cout << "COMPUTATIONAL LOAD AVG" << std::endl <<
-			load_avg1 << " " << load_avg2 << " " << load_avg3 << std::endl << std::endl;
+	// std::system( "/usr/bin/top -n 1 | /usr/bin/head -n5 > ./others/sysinfo" );
+	// std::ifstream				ifs("./others/sysinfo");
+	// std::string					line = "";
+	// std::vector<std::string> 	info;
 
-		/*
-		** RAM
-		*/
-		std::system( "top -l 1 | grep -E \"^CPU|^Phys\" > ./others/raminfo" );
-		std::ifstream				rifs("./others/raminfo");
-		std::string					rline = "";
-		std::vector<std::string>	ram;
+	// while (getline(ifs, line, ' '))
+	// 	info.push_back(line);
 
-		while (getline(rifs, rline, ' '))
-			ram.push_back(rline);
+	// ifs.close();
 
-		rifs.close();
+	// std::string process_total = info.at(1);
+	// std::string process_running = info.at(3);
+	// std::string process_stuck = info.at(5);
+	// std::string process_sleeping = info.at(7);
+	// std::string process_threads = info.at(9);
 
-		std::string cpu_usage_user = ram.at(2);
-		std::string cpu_usage_sys = ram.at(4);
-		std::string cpu_usage_idle = ram.at(6);
+	// std::string load_avg1;
+	// std::string load_avg2;
+	// std::string load_avg3;
 
-		long ram_used = stoi(ram.at(9));
-		long ram_wired = stoi(ram.at(11).substr(1, ram.at(11).length()));
-		long ram_unused = stoi(ram.at(13));
+	// int stuck = 0;
 
-		std::cout << "CPU USAGE" << std::endl <<
-			"User: " << cpu_usage_user << std::endl <<
-			"System: " << cpu_usage_sys << std::endl <<
-			"Idle: " << cpu_usage_idle << std::endl << std::endl;
+	// if (info.at(6) == "stuck,")
+	// 	stuck = 1;
 
-		std::cout << "RAM" << std::endl <<
-			"Max Capacity: 8192MB" << std::endl <<
-			"Used: " << (ram_used - ram_wired) << "MB" << std::endl <<
-			"Wired: " << ram_wired << "MB" << std::endl <<
-			"Unused: " << ram_unused << "MB" << std::endl;
+	// if (stuck == 1)
+	// {
+	// 	load_avg1 = info.at(14);
+	// 	load_avg2 = info.at(15);
+	// 	load_avg3 = info.at(16);
+	// }
+	// else
+	// {
+	// 	load_avg1 = info.at(12);
+	// 	load_avg2 = info.at(13);
+	// 	load_avg3 = info.at(14);
+	// }
 
-		/*
-		** Network throughput
-		*/
-		std::system( "nettop -J bytes_in,bytes_out -x -l1 > ./others/netinfo" );
-		std::ifstream				nifs("./others/netinfo");
-		std::string					nline = "";
-		std::vector<std::string>			net;
+	// std::cout << "PROCESSES" << std::endl <<
+	// 	"Total: " << process_total << std::endl <<
+	// 	"Running: " << process_running << std::endl;
+	// if (stuck == 1)
+	// {
+	// 	std::cout << "Stuck: " << process_stuck << std::endl << 
+	// 	"Sleeping: " << process_sleeping << std::endl <<
+	// 	"Threads: " << process_threads << std::endl << std::endl;
+	// }
+	// else
+	// {
+	// 	std::cout << "Sleeping: " << process_stuck << std::endl << 
+	// 	"Threads: " << process_sleeping << std::endl << std::endl;
+	// }
 
-		long	packet_in = 0;
-		long	packet_out = 0;
-		int		i = 0;
+	// std::cout << "COMPUTATIONAL LOAD AVG" << std::endl <<
+	// 	load_avg1 << " " << load_avg2 << " " << load_avg3 << std::endl << std::endl;
 
-		while (getline(nifs, nline, ' '))
-		{
-			if (nline != "" && (nline.find_first_not_of("0123456789") == std::string::npos))
-			{
-				if (i % 2 == 0)
-					packet_in = packet_in + stol(nline);
-				else
-					packet_out = packet_out + stol(nline);
-				i++;
-			}
-		}
+	// /*
+	// ** RAM
+	// */
+	// std::system( "top -l 1 | grep -E \"^CPU|^Phys\" > ./others/raminfo" );
+	// std::ifstream				rifs("./others/raminfo");
+	// std::string					rline = "";
+	// std::vector<std::string>	ram;
 
-		std::cout << std::endl << "NETWORK THROUGHPUT" << std::endl <<
-			"Packets In: " << packet_in << std::endl << 
-			"Packets Out: " << packet_out << std::endl;
+	// while (getline(rifs, rline, ' '))
+	// 	ram.push_back(rline);
 
-		rifs.close();
-	}
+	// rifs.close();
+
+	// std::string cpu_usage_user = ram.at(2);
+	// std::string cpu_usage_sys = ram.at(4);
+	// std::string cpu_usage_idle = ram.at(6);
+
+	// long ram_used = stoi(ram.at(9));
+	// long ram_wired = stoi(ram.at(11).substr(1, ram.at(11).length()));
+	// long ram_unused = stoi(ram.at(13));
+
+	// std::cout << "CPU USAGE" << std::endl <<
+	// 	"User: " << cpu_usage_user << std::endl <<
+	// 	"System: " << cpu_usage_sys << std::endl <<
+	// 	"Idle: " << cpu_usage_idle << std::endl << std::endl;
+
+	// std::cout << "RAM" << std::endl <<
+	// 	"Max Capacity: 8192MB" << std::endl <<
+	// 	"Used: " << (ram_used - ram_wired) << "MB" << std::endl <<
+	// 	"Wired: " << ram_wired << "MB" << std::endl <<
+	// 	"Unused: " << ram_unused << "MB" << std::endl;
+
+	// /*
+	// ** Network throughput
+	// */
+	// std::system( "nettop -J bytes_in,bytes_out -x -l1 > ./others/netinfo" );
+	// std::ifstream				nifs("./others/netinfo");
+	// std::string					nline = "";
+	// std::vector<std::string>			net;
+
+	// long	packet_in = 0;
+	// long	packet_out = 0;
+	// int		i = 0;
+
+	// while (getline(nifs, nline, ' '))
+	// {
+	// 	if (nline != "" && (nline.find_first_not_of("0123456789") == std::string::npos))
+	// 	{
+	// 		if (i % 2 == 0)
+	// 			packet_in = packet_in + stol(nline);
+	// 		else
+	// 			packet_out = packet_out + stol(nline);
+	// 		i++;
+	// 	}
+	// }
+
+	// std::cout << std::endl << "NETWORK THROUGHPUT" << std::endl <<
+	// 	"Packets In: " << packet_in << std::endl << 
+	// 	"Packets Out: " << packet_out << std::endl;
+
+	// rifs.close();
+	sleep(5);
+	endwin();
 }
 
 
