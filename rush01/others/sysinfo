@@ -1,5 +1,5 @@
-Processes: 332 total, 2 running, 330 sleeping, 1471 threads 
-2018/01/19 19:07:51
-Load Avg: 2.84, 2.55, 2.37 
-CPU usage: 11.11% user, 37.3% sys, 51.85% idle 
-SharedLibs: 254M resident, 60M data, 66M linkedit.
+Processes: 335 total, 2 running, 3 stuck, 330 sleeping, 1505 threads 
+2018/01/19 20:23:57
+Load Avg: 1.88, 2.03, 2.04 
+CPU usage: 13.72% user, 27.45% sys, 58.82% idle 
+SharedLibs: 252M resident, 60M data, 67M linkedit.

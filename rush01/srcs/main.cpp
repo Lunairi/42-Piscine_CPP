@@ -10,27 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <iomanip>
-#include <sstream>
-#include <vector>
-#include <map>
-#include <list>
-#include <algorithm>
-#include <ncurses.h>
-#include <curses.h>
-#include <thread>
-#include <unistd.h>
-#include <limits.h>
-#include <ctime>
-#include <sys/utsname.h>
-#include <numeric>
-#include <stdio.h>
-#include <stdint.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#include <Gkrellm.hpp>
 
 
 int		main() {
@@ -42,17 +22,14 @@ int		main() {
 	// curs_set(0);
 	// while (1)
 	{
-		sleep(1);
 		/*
 		** Hostname/Username 
 		*/
-		char hostname[255]; // 255 is max len on linux
-		char username[255];
-		gethostname(hostname, 255);
-		getlogin_r(username, 255);
+		HostNameModule host("HOSTNAME");
+		UserNameModule user("USERNAME");
 
-		std::cout << "HOSTNAME" << std::endl << hostname << std::endl
-			<< std::endl << "USERNAME" << std::endl << username << std::endl;
+		std::cout << host.getName() << std::endl << host.getOutput() << std::endl << std::endl;
+		std::cout << user.getName() << std::endl << user.getOutput() << std::endl << std::endl;
 
 
 		/*
