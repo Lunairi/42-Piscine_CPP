@@ -15,6 +15,7 @@
 
 RAMUsageModule::RAMUsageModule(std::string const name) : IMonitorModule(), _output(), _name(name)
 {
+	std::system( "top -l 1 | grep -E \"^CPU|^Phys\" > ./others/raminfo" );
 	std::ifstream				rifs("./others/raminfo");
 	std::string					rline = "";
 	std::vector<std::string>	ram;

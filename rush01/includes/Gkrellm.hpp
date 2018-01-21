@@ -52,6 +52,6 @@
 # include <IMonitorDisplay.hpp>
 # include <TerminalDisplay.hpp>
 
-void	text_display();
+void	text_display(std::vector<std::string> flags);
 
 #endif

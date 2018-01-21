@@ -12,19 +12,64 @@
 
 #include <Gkrellm.hpp>
 
+int		input_error(void)
+{
+	std::cout << "You must enter a valid mode for ft_gkrellm" << std::endl <<
+	"If you enter any modules they must be valid" << std::endl <<
+	"Any defined modules will be defined in the order they're put" << std::endl <<
+	"USAGE: 	ft_gkrellm [MODE] [MODULES]" << std::endl <<
+	"-g			enables graphic mode" << std::endl <<
+	"-t			enables text mode" << std::endl << std::endl <<
+	"-h 		enables host module" << std::endl <<
+	"-o 		enables os info module" << std::endl <<
+	"-d 		enables date & time module" << std::endl <<
+	"-c 		enables cpu info module" << std::endl <<
+	"-u 		enables cpu usage module" << std::endl <<
+	"-r 		enables ram usage module" << std::endl <<
+	"-n 		enables network info module" << std::endl;
+
+	return (0);
+}
+
 int		main(int ac, char **av)
 {
-	if (ac != 2 || (strcmp(av[1], "-t") && strcmp(av[1], "-g")))
+	if (ac < 2)
+		return (input_error());
+
+	if (strcmp(av[1], "-t") && strcmp(av[1], "-g"))
+		return (input_error());
+
+	std::string	input[] = 
 	{
-		std::cout << "You must enter a mode for ft_gkrellm" << std::endl <<
-			"USAGE: ft_gkrellm [OPTION]" << std::endl <<
-			"-g			enables graphic mode" << std::endl <<
-			"-t			enables text mode" << std::endl;
-		return (0);
+		"-h", "-o", "-d", "-c", "-u", "-r", "-n"
+	};
+
+	std::vector<std::string>	flags;
+	std::stringstream			v;
+	int 						i = 1;
+	int							x = -1;
+
+	while (++i < ac)
+	{
+		while (++x < 7)
+		{
+			if (av[i] == input[x])
+				flags.push_back(av[i]);
+		}
+		x = -1;
+		try
+		{
+			v << flags.at(i - 2);
+		}
+		catch (const std::exception &e)
+		{
+			return (input_error());
+		}
 	}
-	
+
 	if (!strcmp(av[1], "-t"))
-		text_display();
+		text_display(flags);
+
 	return (0);
 }
 
@@ -38,6 +83,13 @@ int		main(int ac, char **av)
 
 
 
+	// modules.push_back(new HostNameModule(" HOST NAME "));
+	// modules.push_back(new OSInfoModule(" OS INFO "));
+	// modules.push_back(new DateTimeModule(" DATE & TIME "));
+	// modules.push_back(new CPUInfoModule(" CPU INFO "));
+	// modules.push_back(new CPUUsageModule(" CPU USAGE "));
+	// modules.push_back(new RAMUsageModule(" RAM USAGE "));
+	// modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
 
 
 
