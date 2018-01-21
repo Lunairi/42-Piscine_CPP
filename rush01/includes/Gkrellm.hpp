@@ -41,6 +41,7 @@
 # include <sys/sysctl.h>
 
 # include <IMonitorModule.hpp>
+# include <IMonitorDisplay.hpp>
 # include <HostNameModule.hpp>
 # include <OSInfoModule.hpp>
 # include <DateTimeModule.hpp>
@@ -49,9 +50,10 @@
 # include <CPUUsageModule.hpp>
 # include <RAMUsageModule.hpp>
 # include <NetworkInfoModule.hpp>
-# include <IMonitorDisplay.hpp>
 # include <TerminalDisplay.hpp>
+# include <GraphicDisplay.hpp>
 
 void	text_display(std::vector<std::string> flags);
+void	image_display(std::vector<std::string> flags);
 
 #endif

@@ -15,7 +15,6 @@
 
 NetworkInfoModule::NetworkInfoModule(std::string const name) : IMonitorModule(), _output(), _name(name)
 {
-
 	std::system("nettop -J bytes_in,bytes_out -x -l1 > ./others/netinfo");
 	std::ifstream				nifs("./others/netinfo");
 	std::string					nline = "";

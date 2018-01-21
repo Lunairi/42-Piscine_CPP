@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*    main.cpp.              _             _              :::      ::::::::   */
+/*    main.cpp               _             _              :::      ::::::::   */
 /*    By: mlu               | |           | |           :+:      :+:    :+:   */
 /*     ___  __ _  __ _ _ __ | | __ _ _ __ | |_        +:+ +:+         +:+     */
 /*    / _ \/ _` |/ _` | '_ \| |/ _` | '_ \| __|     +/+  +:+       +/+        */
@@ -70,30 +70,12 @@ int		main(int ac, char **av)
 	if (!strcmp(av[1], "-t"))
 		text_display(flags);
 	else
-	{
-		
-	}
+		image_display(flags);
 
 	return (0);
 }
 
 
-
-
-
-
-
-
-
-
-
-	// modules.push_back(new HostNameModule(" HOST NAME "));
-	// modules.push_back(new OSInfoModule(" OS INFO "));
-	// modules.push_back(new DateTimeModule(" DATE & TIME "));
-	// modules.push_back(new CPUInfoModule(" CPU INFO "));
-	// modules.push_back(new CPUUsageModule(" CPU USAGE "));
-	// modules.push_back(new RAMUsageModule(" RAM USAGE "));
-	// modules.push_back(new NetworkInfoModule(" NETWORK INFO "));
 
 
 

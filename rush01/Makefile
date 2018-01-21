@@ -15,12 +15,12 @@
 # Mikim gave me permission to keep his header structure and use for this rush
 # Visit his awesome github here https://github.com/mikim42
 
-SRC = main.cpp TextDisplay.cpp
+SRC = main.cpp TextDisplay.cpp ImageDisplay.cpp
 
 SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp DateTimeModule.cpp \
 			CPUInfoModule.cpp ProcessInfoModule.cpp CPUUsageModule.cpp \
 			RAMUsageModule.cpp NetworkInfoModule.cpp \
-			TerminalDisplay.cpp
+			TerminalDisplay.cpp GraphicDisplay.cpp
 
 OBJ = $(SRC:.cpp=.o)
 OBJ_CLASS = $(SRC_CLASS:.cpp=.o)
@@ -35,10 +35,10 @@ OBJS = $(addprefix $(OBJDIR), $(OBJ))
 SRCS_CLASS = $(addprefix $(SRCDIR_CLASS), $(SRC_CLASS))
 OBJS_CLASS = $(addprefix $(OBJDIR_CLASS), $(OBJ_CLASS))
 
-LIBS = -lncurses -lmlx -framework OpenGL -framework AppKit
-HEADER = -I includes -I minilibx
+LIBS = -lncurses -framework GLUT -framework OpenGL
+HEADER = -I includes
 
-CC = g++
+CC = clang++
 CFLAG = -c
 WFLAG = -Wall -Wextra -Werror
 
