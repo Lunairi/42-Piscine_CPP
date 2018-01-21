@@ -8,7 +8,7 @@ This repo contains my work and progress through each day, below shows what I've 
 To pass a day you must at least accomplish 50/100.
 
 | Progress | Completed | Results |
-|----------|-----------|---------|
+|:--------:|:---------:|:-------:|
 | Day00 | 3/3   |  (100%) |
 | Day01 | 11/11 |  (86%) |
 | Day02 | 3/4   |  (76%) |
