@@ -7,7 +7,7 @@ My piscine CPP work at 42. The piscine is a 2 week crash course on C++ that the 
 This repo contains my work and progress through each day, below shows what I've done and the grade I earned for that day. (Even if I completed 100% of the assignments some days I did misread some instructions or some instructions weren't as clear, but regardless the practice and knowledge gained is invaluable).
 To pass a day you must at least accomplish 50/100.
 
-|   Day    | Completed | Results |
+| Day Name | Progress  | Results |
 |:--------:|:---------:|:-------:|
 | Day00 | 3/3   |  (100%) |
 | Day01 | 11/11 |  (86%) |
