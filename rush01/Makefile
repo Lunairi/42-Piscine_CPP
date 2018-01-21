@@ -35,8 +35,8 @@ OBJS = $(addprefix $(OBJDIR), $(OBJ))
 SRCS_CLASS = $(addprefix $(SRCDIR_CLASS), $(SRC_CLASS))
 OBJS_CLASS = $(addprefix $(OBJDIR_CLASS), $(OBJ_CLASS))
 
-LIBS = -lncurses
-HEADER = -I includes
+LIBS = -lncurses -lmlx -framework OpenGL -framework AppKit
+HEADER = -I includes -I minilibx
 
 CC = g++
 CFLAG = -c

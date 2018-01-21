@@ -15,11 +15,11 @@
 int		input_error(void)
 {
 	std::cout << "You must enter a valid mode for ft_gkrellm" << std::endl <<
-	"If you enter any modules they must be valid" << std::endl <<
+	"If you enter any modules they must be valid (no module specified will launch all modules)" << std::endl <<
 	"Any defined modules will be defined in the order they're put" << std::endl <<
 	"USAGE: 	ft_gkrellm [MODE] [MODULES]" << std::endl <<
-	"-g			enables graphic mode" << std::endl <<
-	"-t			enables text mode" << std::endl << std::endl <<
+	"-g 		enables graphic mode" << std::endl <<
+	"-t 		enables text mode" << std::endl << std::endl <<
 	"-h 		enables host module" << std::endl <<
 	"-o 		enables os info module" << std::endl <<
 	"-d 		enables date & time module" << std::endl <<
@@ -69,6 +69,10 @@ int		main(int ac, char **av)
 
 	if (!strcmp(av[1], "-t"))
 		text_display(flags);
+	else
+	{
+		
+	}
 
 	return (0);
 }
