@@ -10,7 +10,6 @@
 /*         |___/ |___/|_|                                                     */
 /* ************************************************************************** */
 
-
 #include <Gkrellm.hpp>
 
 OSInfoModule::OSInfoModule(std::string const name) : IMonitorModule(), _output(), _name(name)

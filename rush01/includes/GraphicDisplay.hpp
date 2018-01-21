@@ -20,16 +20,15 @@ class GraphicDisplay : public IMonitorDisplay
 {
 	public:
 
-		GraphicDisplay(std::vector<IMonitorModule*> const modules);
+		GraphicDisplay(std::vector<IMonitorModule*> const modules, sf::RenderWindow	&window);
 		virtual ~GraphicDisplay(void);
 		
 		void		renderOutput(void);
 		void		refreshOutput(void);
-		void		fillSpace(char *str);
 
-		void		*getMlx(void);
-		void		*getWin(void);
-		
+		void		graphCPU(int i);
+		void		drawPony(int i);
+
 	private:
 
 		GraphicDisplay(void);
@@ -38,14 +37,20 @@ class GraphicDisplay : public IMonitorDisplay
 
 		std::vector<IMonitorModule*>	_modules;
 
-		void		*_mlx;
-		void		*_win;
-		void		*_img;
-		int			*_pix;
-		int			_bits;
-		int			_sline;
-		int			_endian;
-	
+		sf::RenderWindow				&_window;
+
+		sf::Font						_arial;
+		sf::Font						_trebuchet;
+		sf::Font						_courier;
+
+		sf::Color						_grey;
+		sf::Color						_lightgrey;
+		sf::Color						_slateblue;
+		sf::Color						_azure;
+		sf::Color						_lightblue;
+
+		int								_size;
+		int								_pony;
 };
 
 #endif

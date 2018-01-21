@@ -26,7 +26,8 @@ int		input_error(void)
 	"-c 		enables cpu info module" << std::endl <<
 	"-u 		enables cpu usage module" << std::endl <<
 	"-r 		enables ram usage module" << std::endl <<
-	"-n 		enables network info module" << std::endl;
+	"-n 		enables network info module" << std::endl <<
+	"-p 		enables magical pony module" << std::endl;
 
 	return (0);
 }
@@ -39,9 +40,11 @@ int		main(int ac, char **av)
 	if (strcmp(av[1], "-t") && strcmp(av[1], "-g"))
 		return (input_error());
 
+	srand(time(0));
+
 	std::string	input[] = 
 	{
-		"-h", "-o", "-d", "-c", "-u", "-r", "-n"
+		"-h", "-o", "-d", "-c", "-u", "-r", "-n", "-p"
 	};
 
 	std::vector<std::string>	flags;
@@ -51,7 +54,7 @@ int		main(int ac, char **av)
 
 	while (++i < ac)
 	{
-		while (++x < 7)
+		while (++x < 8)
 		{
 			if (av[i] == input[x])
 				flags.push_back(av[i]);

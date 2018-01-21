@@ -26,6 +26,8 @@ class TerminalDisplay : public IMonitorDisplay
 		void		renderOutput(void);
 		void		refreshOutput(void);
 		void		fillSpace(char *str);
+
+		void		drawPony(int i);
 		
 	private:
 
@@ -41,7 +43,7 @@ class TerminalDisplay : public IMonitorDisplay
 		int		_text;
 		int		_col;
 		int		_row;
-	
+		int		_pony;
 };
 
 #endif

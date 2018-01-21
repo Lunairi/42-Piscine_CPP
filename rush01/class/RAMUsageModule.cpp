@@ -62,6 +62,7 @@ std::string const					&RAMUsageModule::getName(void) const
 
 void								RAMUsageModule::tick(void)
 {
+	std::system( "top -l 1 | grep -E \"^CPU|^Phys\" > ./others/raminfo" );
 	std::ifstream				rifs("./others/raminfo");
 	std::string					rline = "";
 	std::vector<std::string>	ram;

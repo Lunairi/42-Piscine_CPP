@@ -18,9 +18,11 @@
 SRC = main.cpp TextDisplay.cpp ImageDisplay.cpp
 
 SRC_CLASS = HostNameModule.cpp OSInfoModule.cpp DateTimeModule.cpp \
-			CPUInfoModule.cpp ProcessInfoModule.cpp CPUUsageModule.cpp \
+			CPUInfoModule.cpp CPUUsageModule.cpp \
 			RAMUsageModule.cpp NetworkInfoModule.cpp \
-			TerminalDisplay.cpp GraphicDisplay.cpp
+			TerminalDisplay.cpp GraphicDisplay.cpp \
+			IMonitorModule.cpp IMonitorDisplay.cpp \
+			PonyModule.cpp
 
 OBJ = $(SRC:.cpp=.o)
 OBJ_CLASS = $(SRC_CLASS:.cpp=.o)
@@ -35,8 +37,10 @@ OBJS = $(addprefix $(OBJDIR), $(OBJ))
 SRCS_CLASS = $(addprefix $(SRCDIR_CLASS), $(SRC_CLASS))
 OBJS_CLASS = $(addprefix $(OBJDIR_CLASS), $(OBJ_CLASS))
 
-LIBS = -lncurses -framework GLUT -framework OpenGL
-HEADER = -I includes
+LIBS = -lncurses -framework sfml-graphics -framework sfml-window -framework sfml-system -F SFML/Frameworks
+HEADER = -I includes -I ./SFML/include
+
+SFML = DYLD_FRAMEWORK_PATH="$(PWD)/SFML/Frameworks"
 
 CC = clang++
 CFLAG = -c
@@ -61,6 +65,8 @@ $(NAME): $(OBJS) $(OBJS_CLASS)
 	@$(CC) $(OBJS) $(OBJS_CLASS) $(HEADER) $(LIBS) -o $@
 	@echo "\x1b[32;1m[ft_gkrellm created]\x1b[0m"
 
+sfml:
+	@echo export $(SFML)
 
 clean:
 	@/bin/rm -rf $(OBJDIR)

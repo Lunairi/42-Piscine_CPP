@@ -18,7 +18,9 @@ CPUInfoModule::CPUInfoModule(std::string const name) : IMonitorModule(), _output
 	char buf[128];
 	size_t buflen = 128;
 	sysctlbyname("machdep.cpu.brand_string", &buf, &buflen, NULL, 0);
-	this->_output.push_back(buf);
+	std::string convert = buf;
+	this->_output.push_back(convert.substr(0, convert.find("M) ") + 2));
+	this->_output.push_back(convert.substr(convert.find("M) ") + 3, convert.length()));
 
 	return ;
 }
