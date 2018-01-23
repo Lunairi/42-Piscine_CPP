@@ -19,4 +19,4 @@ To pass a day you must at least accomplish 50/100.
 | Day07 | 3/3   |  (100%) |
 | Day08 | 3/5   |  (53%) |
 | Rush00 | 1/1   |  (120%) |
-| Rush01 | 1/1   |  (TBD) |
+| Rush01 | 1/1   |  (115%) |
